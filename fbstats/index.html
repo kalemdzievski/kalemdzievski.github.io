@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <title>AWD CanvasJS</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="scripts/canvasjs.min.js"></script>
+	<script type="text/javascript" src="scripts/charts.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link href="styles/dashboard.css" rel="stylesheet">
+	<script type="text/javascript">
+	
+		window.fbAsyncInit = function() {
+			FB.init({
+			  appId      : 'CAACEdEose0cBAFypiNrYnHuIZARmrcLtauclwxNp9kCeFZCQUZAuaX721ZAAHRDvyLxyQzBwTG9QrBKrmdQnWyJgyT0PLzTLHopYJZBZAXUxGtWi9kozkDJbLH5IYNQf3gfbOAgLzGok5qObftjmmNmMZB4eRubYkeOjjAdnMbaJXZCn0kt3pdDPuhZCZBGZAKp9961vM543ZCJZCCWRiHVejYybZA',
+			  xfbml      : true,
+			  version    : 'v2.1'
+			});
+		};
+
+        (function(d, s, id){
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) {return;}
+			js = d.createElement(s); js.id = id;
+			js.src = "//connect.facebook.net/en_US/sdk.js";
+			fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+	
+		/* make the API call */
+		FB.api(
+			"/me/feed",
+			function (response) {
+			  if (response && !response.error) {
+				console.log(response);
+			  }
+			}
+		);
+	</script>
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Students enrolled in faculties according to the mode of study, sex and year of study, 2013/2014, Republic of Macedonia.</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">About</a></li>
+            <li><a href="#">Credits</a></li>
+            <li><a href="#">Help</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li class="active"><a href="#">Total - sex <span class="sr-only">(current)</span></a></li>
+            <li><a href="#">Total - mode of study</a></li>
+            <li><a href="#">Total - year of study</a></li>
+            <li><a href="#">Total - university</a></li>
+          </ul>
+          <ul class="nav nav-sidebar">
+            <li><a href="#">Kiril and Metodij - sex</a></li>
+            <li><a href="#">Kiril and Metodij - mode of study</a></li>
+            <li><a href="#">Kiril and Metodij - years</a></li>
+          </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+		  
+		  <h2 class="sub-header">Section title</h2>
+		  <div id="chartContainer1" style="height: 300px; width: 100%;"></div>
+		  
+		  <h2 class="sub-header">Section title</h2>
+		  <div id="chartContainer2" style="height: 300px; width: 100%;"></div>
+		  
+		  <h2 class="sub-header">Section title</h2>
+		  <div id="chartContainer3" style="height: 300px; width: 100%;"></div>
+		  
+		  <h2 class="sub-header">Section title</h2>
+		  <div id="chartContainer4" style="height: 300px; width: 100%;"></div>
+		  
+		</div>
+      </div>
+    </div>
+
+  </body>
+</html>
+
