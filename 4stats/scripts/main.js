@@ -73,9 +73,9 @@
 						venues.push(venue);
 						
 						if(i == 0)
-							$("#venuesList").append('<a data-id="' + venueId + '" href="#" onclick="javascript:venueClick(this);" class="list-group-item venue active">' + venueName + '</a>');
+							$("#venuesList").append('<a data-id="' + venueId + '" href="#" onclick="javascript:venueClick(this, \'' + token + '\');" class="list-group-item venue active">' + venueName + '</a>');
 						else
-							$("#venuesList").append('<a data-id="' + venueId + '" href="#" onclick="javascript:venueClick(this);" class="list-group-item venue">' + venueName + '</a>');
+							$("#venuesList").append('<a data-id="' + venueId + '" href="#" onclick="javascript:venueClick(this, \'' + token + '\');" class="list-group-item venue">' + venueName + '</a>');
 					}
 				}
 				else {
@@ -88,14 +88,14 @@
 			}
 		});
 		
-		getVenue($(".venue.active").data('id'));	
+		getVenue($(".venue.active").data('id'), token);	
 		venues.sort(compareVenuesByRating);
 	}
 		
-	function getVenue(id) {
+	function getVenue(id, token) {
 		showLoader();
 		$.ajax({
-			url: config.apiUrl + 'v2/venues/' + id + '?oauth_token=KV3WTKON301SAXW1HNF4BC40WVRARJL2OO5UTV0SDIP5NMPA&v=' + config.date,
+			url: config.apiUrl + 'v2/venues/' + id + '?oauth_token=' + token + '&v=' + config.date,
 			type: 'GET',
 			async: false,
 			dataType: 'json',
@@ -158,11 +158,11 @@
 		showVenuePhotosChart(venueData['photosDates']);
 	}
 
-	function venueClick(target) {
+	function venueClick(target, token) {
 		$(".venue").removeClass('active');
 		$(target).addClass('active');
 		venueId = $(target).data('id');
-		getVenue(venueId);
+		getVenue(venueId, token);
     }	
 	
 	function compareVenuesByRating(venue1, venue2) {
@@ -547,7 +547,8 @@
 	
 $(document).ready(function () {
 	
-	var token = window.location.hash.split("=")[1];
+	//var token = window.location.hash.split("=")[1];
+	var token = 'HLT4UTYZGZXWPBZCHNJHXDSDWK221H41HNRQS4EPCHAM0VMK';
 	if(token) {
 	
 		connected();
