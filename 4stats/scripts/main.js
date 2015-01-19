@@ -93,7 +93,6 @@
 	}
 		
 	function getVenue(id) {
-		console.log("safasfasfasfas");
 		showLoader();
 		$.ajax({
 			url: config.apiUrl + 'v2/venues/' + id + '?oauth_token=KV3WTKON301SAXW1HNF4BC40WVRARJL2OO5UTV0SDIP5NMPA&v=' + config.date,
@@ -160,7 +159,6 @@
 	}
 
 	function venueClick(target) {
-		console.log("eeeeeeee");
 		$(".venue").removeClass('active');
 		$(target).addClass('active');
 		venueId = $(target).data('id');
@@ -538,8 +536,8 @@
 	function showLoader() {
         $(".fakeloader").fakeLoader({
             bgColor: "rgba(0,0,0,0.7)",
-            spinner: "spinner2",
-            zIndex: "99999"
+			zIndex:"999",
+            spinner: "spinner2"
         });
     }
 
@@ -550,7 +548,6 @@
 $(document).ready(function () {
 	
 	var token = window.location.hash.split("=")[1];
-	console.log(token);
 	if(token) {
 	
 		connected();
