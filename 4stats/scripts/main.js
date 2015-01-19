@@ -544,7 +544,7 @@
 	
 $(document).ready(function () {
 	
-	var token = getParameterByName('access_token');
+	var token = window.location.hash;
 	if(token) {
 		getVenues(category, token);
 		
