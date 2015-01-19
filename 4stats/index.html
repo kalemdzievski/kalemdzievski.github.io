@@ -1,16 +1,209 @@
-<!DOCTYPE html>
-<html lang="en">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+	<head>
+		<title>4Stats</title>
+		<meta name="viewport" ="width=device-width, initial-scale=1">
+		<meta name="viewport" ="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+		<link rel="stylesheet" href="styles/social-buttons-3.css" />
+		<link rel="stylesheet" href="styles/font-awesome.min.css" />
+		<script type="text/javascript" src="scripts/fakeLoader.js"></script>
+		<script type="text/javascript" src="scripts/canvasjs.min.js"></script>
+		<script type="text/javascript" src="scripts/main.js"></script>
+		<style>
+			.scrollable-menu {
+				height: auto;
+				max-height: 550px;
+				overflow-x: hidden;
+			}
+			
+			html,body{
+				height: 100%;
+			} 
+			
+			/* Set the fixed height of the footer here */
+			.footer {
+			  height: 100px;
+			  background-color: #f5f5f0;
+			  margin-top:50px;
+			  padding-top:20px;
+			  padding-bottom:20px;
+			}
+		</style>	
+	</head>
+	
+	<body style="padding-top: 70px;">
 
-  <head>
-    <meta charset="utf-8">
-    <title>Население Македонија</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-  </head>
+		<div class="fakeloader"></div>
+		
+		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a id="btnMain" class="navbar-brand" href="#">4Stats</a>
+				</div>
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav">
+						<li>
+							<a id="btnRating" href="#">Rating</a>
+						</li>
+						<li>
+							<a id="btnUsers" href="#">Users</a>
+						</li>
+						<li>
+							<a id="btnTips" href="#">Tips</a>
+						</li>
+						<li>
+							<a id="btnPhotos" href="#">Photos</a>
+						</li>
+						<li>
+							<a id="btnHereNow" href="#">Here now</a>
+						</li>
+						<li>
+							<a id="btnCheckins" href="#">Checkins</a>
+						</li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li class="dropdown">
+							<a href="#" data-toggle="dropdown" class="dropdown-toggle">Category <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a data-id="0" class="venueCategory" href="#">Pizza restaurants</a></li>
+								<li><a data-id="1" class="venueCategory" href="#">Restaurants</a></li>
+								<li><a data-id="2" class="venueCategory" href="#">Bars</a></li>
+								<li><a data-id="3" class="venueCategory" href="#">Cockatils</a></li>
+								<li><a data-id="4" class="venueCategory" href="#">Lounges</a></li>
+								<li><a data-id="5" class="venueCategory" href="#">Night clubs</a></li>
+								<li><a data-id="6" class="venueCategory" href="#">Cafes</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
 
-  <body>
-    
-  </body>
-</html>
-
+		<div id="connectContainer" class="container">
+			<div class="col-md-5 col-md-offset-3">
+				<div class="panel panel-default">
+					<div class="panel-heading text-center"><h3 class="panel-title"><strong>Connect with Foursqare</strong></h3></div>
+					<div class="panel-body">
+						<p class="lead text-center">
+							Please connect with Foursqare to see the content of this application.
+						</p>
+						<button class="btn btn-foursquare center-block" onClick="connect();">Connect with Foursquare</button>
+					</div>
+				</div>
+			</div>
+		</div>
+				
+		<div id="mainStats" class="container hide">
+		
+			<div class="row">
+				<div class="col-md-3 venueList">
+					<p id="venuesCategoryName" class="lead">Pizza restaurants</p>
+					<div id="venuesList" class="list-group scrollable-menu" role="menu"></div>
+				</div>
+				
+				<div class="col-md-9">
+					<p class="lead" style="display:inline;">Statistics for <p style="display:inline;" class="lead" id="venueName">Enriko</p></p>
+					<div class="panel panel-default">
+					<div role="tabpanel">
+						<ul class="nav nav-tabs nav-justified" role="tablist" id="myTab"> 
+							<li role="presentation" class="active"><a data-id="0" href="#generalDataTab" aria-controls="generalData" role="tab" data-toggle="tab">General statistics</a></li>
+							<li role="presentation"><a data-id="1" href="#tipsTab" aria-controls="tips" role="tab" data-toggle="tab">Tips</a></li>
+							<li role="presentation"><a data-id="2" href="#photosTab" aria-controls="photos" role="tab" data-toggle="tab">Photos</a></li>
+						</ul>
+						<div class="tab-content">
+						<div role="tabpanel" class="tab-pane active" id="generalDataTab">
+							<div id="chartVenueGeneralData" style="height: 500px; width: 100%;"></div>
+						</div>
+						<div role="tabpanel" class="tab-pane" id="tipsTab">
+							<div id="chartVenueTips" style="height: 500px; width: 100%;"></div>
+						</div>
+						<div role="tabpanel" class="tab-pane" id="photosTab">
+							<div id="chartVenuePhotos" style="height: 500px; width: 100%;"></div>
+						</div>
+					  </div>
+					</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	
+		<div id="ratingStats" class="container hide">
+			<div class="panel panel-default">
+                <div class="panel-heading"><h4>Statistics by rating: Top 10 venues</h4></div>
+                <div class="panel-body">
+                    <div id="chartVenuesRatings" style="height: 500px; width: 100%;">
+					</div>
+                </div>
+            </div>
+		</div>
+	
+		<div id="usersStats" class="container hide">
+			<div class="panel panel-default">
+                <div class="panel-heading"><h4>Statistics by users: Top 10 venues</h4></div>
+                <div class="panel-body">  
+                    <div id="chartVenuesUsers" style="height: 500px; width: 100%;">
+					</div>
+                </div>
+            </div>
+		</div>
+	
+		<div id="tipsStats" class="container hide">
+			<div class="panel panel-default">
+                <div class="panel-heading"><h4>Statistics by tips: Top 10 venues</h4></div>
+                <div class="panel-body">
+					<div id="chartVenuesTips" style="height: 500px; width: 100%;">
+					</div>	
+                </div>
+            </div>
+		</div>
+	
+		<div id="photosStats" class="container hide">
+			<div class="panel panel-default">
+                <div class="panel-heading"><h4>Statistics by photos: Top 10 venues</h4></div>
+                <div class="panel-body">
+					<div id="chartVenuesPhotos" style="height: 500px; width: 100%;">
+					</div>	
+                </div>
+            </div>
+		</div>
+	
+		<div id="hereNowStats" class="container hide">
+			<div class="panel panel-default">
+                <div class="panel-heading"><h4>Statistics by here now: Top 10 venues</h4></div>
+                <div class="panel-body">
+					<div id="chartVenuesHereNow" style="height: 500px; width: 100%;">
+					</div>	
+                </div>
+            </div>
+		</div>
+	
+		<div id="checkinsStats" class="container hide">
+			<div class="panel panel-default">
+                <div class="panel-heading"><h4>Statistics by checkins: Top 10 venues</h4></div>
+                <div class="panel-body">
+                    <div id="chartVenuesCheckins" style="height: 500px; width: 100%;">
+					</div>
+                </div>
+            </div>
+		</div>
+		
+		
+		<footer class="footer navbar-fixed-bottom">
+			<div class="container">
+				<p class="text-muted">Place sticky footer content here.</p>
+			</div>
+		</footer>
+		
+	</body>
+</html> 
