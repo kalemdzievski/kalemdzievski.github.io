@@ -27,13 +27,6 @@
 		city: "Skopje",
 		date: today()
 	};
-	
-	function getParameterByName(name) {
-		name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-		var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-			results = regex.exec(location.search);
-		return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-	}
 
 	function getVenues(categoryId, token) {
 		venues = [];
@@ -547,8 +540,7 @@
 	
 $(document).ready(function () {
 	
-	//var token = window.location.hash.split("=")[1];
-	var token = 'HLT4UTYZGZXWPBZCHNJHXDSDWK221H41HNRQS4EPCHAM0VMK';
+	var token = window.location.hash.split("=")[1];
 	if(token) {
 	
 		connected();
