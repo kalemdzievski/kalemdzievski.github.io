@@ -545,6 +545,7 @@
 $(document).ready(function () {
 	
 	var token = window.location.hash;
+	console.log(token);
 	if(token) {
 		getVenues(category, token);
 		
