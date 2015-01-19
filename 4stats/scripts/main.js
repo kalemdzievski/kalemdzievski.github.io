@@ -530,6 +530,11 @@
 		window.location.replace(config.apiRedirect);
 	}
 
+	function connected() {
+		$("#connectContainer").addClass('hide');
+		$("#mainStats").removeClass('hide');
+	}
+	
 	function showLoader() {
         $(".fakeloader").fakeLoader({
             bgColor: "rgba(0,0,0,0.7)",
@@ -547,6 +552,8 @@ $(document).ready(function () {
 	var token = window.location.hash.split("=")[1];
 	console.log(token);
 	if(token) {
+	
+		
 		getVenues(category, token);
 		
 		$(".venueCategory").click(function () {
