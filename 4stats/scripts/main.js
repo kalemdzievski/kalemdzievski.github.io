@@ -553,7 +553,7 @@ $(document).ready(function () {
 	console.log(token);
 	if(token) {
 	
-		
+		connected();
 		getVenues(category, token);
 		
 		$(".venueCategory").click(function () {
