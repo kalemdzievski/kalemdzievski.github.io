@@ -1,4 +1,5 @@
 	
+	var TOP = 5;
 	var	category = 0;
 	var venues = [];
 	var venueData = {};
@@ -234,25 +235,54 @@
 
 	function showVenuesUsersChart(venuesData) {
 		var chartVenuesUsers = new CanvasJS.Chart("chartVenuesUsers", {
-			title:{
-				text: "Top 10 venues by number of users"
-			},
 			theme: "theme2",
+			title:{ 
+				text: "Top 10 venus by number of tips"
+			},
+			axisY: {				
+				title: "Number of People"
+			},					
+			legend:{
+				verticalAlign: "top",
+				horizontalAlign: "centre",
+				fontSize: 16
+
+			},
+			data : [{
+				type: "column",
+				legendMarkerType: "none",	
+				indexLabel: "{y}",
+				dataPoints: venuesData
+			}]
+		});
+		setTimeout(function(){
+			chartVenuesUsers.render();
+		},10);
+		
+		var chartVenuesUsers2 = new CanvasJS.Chart("chartVenuesUsers2", {
+			title:{
+				text: "Top " + TOP + " venues by users"
+			},
+			animationEnabled: true,
+			legend:{
+				verticalAlign: "bottom",
+				horizontalAlign: "center"
+			},
 			data: [
 				{        
-					type: "doughnut",
-					indexLabelFontFamily: "Garamond",       
 					indexLabelFontSize: 20,
-					startAngle:0,
-					indexLabelFontColor: "dimgrey",       
-					indexLabelLineColor: "darkgrey", 
-					toolTipContent: "{y} %", 
+					indexLabelFontFamily: "Monospace",       
+					indexLabelFontColor: "darkgrey", 
+					indexLabelLineColor: "darkgrey",        
+					indexLabelPlacement: "outside",
+					type: "pie",       
+					toolTipContent: "{label}: {y} - <strong>#percent%</strong>",
 					dataPoints: venuesData
 				}
 			]
 		});
 		setTimeout(function(){
-			chartVenuesUsers.render();
+			chartVenuesUsers2.render();
 		},10);
 	}
 	
@@ -354,24 +384,22 @@
 	function showVenuesCheckinsChart(venuesData) {
 		var chartVenuesCheckins = new CanvasJS.Chart("chartVenuesCheckins", {
 			title:{
-			text: "Top 10 venues by checkins"
+				text: "Top " + TOP + " venues by checkins"
 			},
+			animationEnabled: true,
 			legend:{
-				verticalAlign: "center",
-				horizontalAlign: "left",
-				fontSize: 20,
-				fontFamily: "Helvetica"        
+				verticalAlign: "bottom",
+				horizontalAlign: "center"
 			},
-			theme: "theme2",
 			data: [
 				{        
-					type: "pie",       
-					indexLabelFontFamily: "Garamond",       
 					indexLabelFontSize: 20,
-					indexLabel: "{label} {y}%",
-					startAngle:-20,      
-					showInLegend: true,
-					toolTipContent:"{legendText} {y}%",
+					indexLabelFontFamily: "Monospace",       
+					indexLabelFontColor: "darkgrey", 
+					indexLabelLineColor: "darkgrey",        
+					indexLabelPlacement: "outside",
+					type: "pie",       
+					toolTipContent: "{label}: {y} - <strong>#percent%</strong>",
 					dataPoints: venuesData
 				}
 			]
@@ -497,6 +525,7 @@
 		$("#photosStats").addClass('hide');
 		$("#hereNowStats").addClass('hide');
 		$("#checkinsStats").addClass('hide');
+		$("#documentation").addClass('hide');
 	}
 	
 	function today() {
@@ -561,7 +590,7 @@ $(document).ready(function () {
 			var venuesCopy = venues.slice();
 			venuesCopy.sort(compareVenuesByRating);
 			var venuesData = [];
-			for(var i=0; i<10; i++) {
+			for(var i=0; i<TOP; i++) {
 				venuesData.push({"y": venues[i]['rating'], "label": venues[i]['name']});
 			}
 			showVenuesRatingsChart(venuesData);
@@ -573,7 +602,7 @@ $(document).ready(function () {
 			var venuesCopy = venues.slice();
 			venuesCopy.sort(compareVenuesByUsers);
 			var venuesData = [];
-			for(var i=0; i<10; i++) {
+			for(var i=0; i<TOP; i++) {
 				venuesData.push({"y": venuesCopy[i]['users'], "label": venuesCopy[i]['name']});
 			}
 			showVenuesUsersChart(venuesData);
@@ -585,7 +614,7 @@ $(document).ready(function () {
 			var venuesCopy = venues.slice();
 			venuesCopy.sort(compareVenuesByTips);
 			var venuesData = [];
-			for(var i=0; i<10; i++) {
+			for(var i=0; i<TOP; i++) {
 				venuesData.push({"y": venuesCopy[i]['tips'], "label": venuesCopy[i]['name']});
 			}
 			showVenuesTipsChart(venuesData);
@@ -597,7 +626,7 @@ $(document).ready(function () {
 			var venuesCopy = venues.slice();
 			venuesCopy.sort(compareVenuesByPhotos);
 			var venuesData = [];
-			for(var i=0; i<10; i++) {
+			for(var i=0; i<TOP; i++) {
 				venuesData.push({"y": venuesCopy[i]['photos'], "label": venuesCopy[i]['name']});
 			}
 			showVenuesPhotosChart(venuesData);
@@ -609,7 +638,7 @@ $(document).ready(function () {
 			var venuesCopy = venues.slice();
 			venuesCopy.sort(compareVenuesByHereNow);
 			var venuesData = [];
-			for(var i=0; i<10; i++) {
+			for(var i=0; i<TOP; i++) {
 				venuesData.push({"y": venuesCopy[i]['hereNow'], "label": venuesCopy[i]['name']});
 			}
 			showVenuesHereNowChart(venuesData);
@@ -621,7 +650,7 @@ $(document).ready(function () {
 			var venuesCopy = venues.slice();
 			venuesCopy.sort(compareVenuesByCheckins);
 			var venuesData = [];
-			for(var i=0; i<10; i++) {
+			for(var i=0; i<TOP; i++) {
 				venuesData.push({"y": venuesCopy[i]['checkins'], "legendText": venuesCopy[i]['name'], "label": venuesCopy[i]['name']});
 			}
 			showVenuesCheckinsChart(venuesData);
@@ -630,21 +659,28 @@ $(document).ready(function () {
 		});
 		
 		$(document).on('shown.bs.tab', 'a[data-toggle="tab"]', function (e) {
-		if($(this).data('id') == 0){
-			setTimeout(function(){
-				showVenueGeneralDataChart(venueData['generalData']);
-			},10);
-		}
-		else if($(this).data('id') == 1){
-			setTimeout(function(){
-				showVenueTipsChart(venueData['tipsDates']);
-			},10);
-		}
-		else if($(this).data('id') == 2){
-			setTimeout(function(){
-				showVenuePhotosChart(venueData['photosDates']);
-			},10);
-		}
-	});
+			if($(this).data('id') == 0){
+				setTimeout(function(){
+					showVenueGeneralDataChart(venueData['generalData']);
+				},10);
+			}
+			else if($(this).data('id') == 1){
+				setTimeout(function(){
+					showVenueTipsChart(venueData['tipsDates']);
+				},10);
+			}
+			else if($(this).data('id') == 2){
+				setTimeout(function(){
+					showVenuePhotosChart(venueData['photosDates']);
+				},10);
+			}
+		});
+		
+		
+		
+		$("#documentationLink").click(function () {
+			hideAll();
+			$("#documentation").removeClass('hide');
+		});
 	}
 });
