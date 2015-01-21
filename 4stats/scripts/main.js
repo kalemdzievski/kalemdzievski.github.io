@@ -786,8 +786,7 @@
 	
 $(document).ready(function () {
 	
-	//var token = window.location.hash.split("=")[1];
-	var token = "HLT4UTYZGZXWPBZCHNJHXDSDWK221H41HNRQS4EPCHAM0VMK";
+	var token = window.location.hash.split("=")[1];
 	if(token) {
 	
 		connected();
