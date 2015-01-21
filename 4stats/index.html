@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
+
 	<head>
 		<title>4Stats</title>
 		<meta name="viewport" ="width=device-width, initial-scale=1">
@@ -10,6 +11,7 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 		<link rel="stylesheet" href="styles/social-buttons-3.css" />
 		<link rel="stylesheet" href="styles/font-awesome.min.css" />
+		<link rel="stylesheet" href="styles/fakeLoader.css" />
 		<link rel="stylesheet" href="styles/main.css" />
 		<script type="text/javascript" src="scripts/fakeLoader.js"></script>
 		<script type="text/javascript" src="scripts/canvasjs.min.js"></script>
@@ -67,9 +69,6 @@
 							<a id="btnPhotos" href="#">Photos</a>
 						</li>
 						<li>
-							<a id="btnHereNow" href="#">Here now</a>
-						</li>
-						<li>
 							<a id="btnCheckins" href="#">Checkins</a>
 						</li>
 					</ul>
@@ -100,18 +99,22 @@
 				</div>
 			</div>
 		</nav>
-
+		
 		<div id="connectContainer" class="container">
-			<div class="col-md-4 col-md-offset-4">
-				<div class="panel panel-default">
-					<div class="panel-heading text-center"><h3 class="panel-title"><strong>Connect with Foursqare</strong></h3></div>
-					<div class="panel-body">
-						<p class="lead text-center">
-							Please connect with Foursqare to see the content of this application.
-						</p>
-						<button class="btn btn-foursquare center-block" onClick="connect();"><i class="fa fa-foursquare"></i> | Connect with Foursquare</button>
-					</div>
-				</div>
+			<div class="col-md-8 col-md-offset-2">
+				<h1 class="text-center">Welcome to 4Stats</h1>
+				<br>
+				<p class="lead text-center">
+					4Stats is a simple web application that uses <a target="_blank" href="https://developer.foursquare.com/">Foursquare API</a> to get data for Macedonian local places 
+					or as they are called by <a target="_blank" href="https://developer.foursquare.com/">Foursquare API</a> - Venues, and create simple statistics for the venues in different
+					categories like: Top 5 venues by rating, users, tips and many others. 
+					The statistics are shown with the beautiful <a target="_blank" href="http://canvasjs.com/">CanvasJS</a> chars in various categories and themes. 
+				</p>
+				<br>
+				<p class="lead text-center">
+					Please connect with Foursqare to see the content of this application.
+				</p>
+				<button class="btn btn-foursquare center-block" onClick="connect();"><i class="fa fa-foursquare"></i> | Connect with Foursquare</button>
 			</div>
 		</div>
 				
@@ -128,13 +131,17 @@
 					<div class="panel panel-default">
 					<div role="tabpanel">
 						<ul class="nav nav-tabs nav-justified" role="tablist" id="myTab"> 
-							<li role="presentation" class="active"><a data-id="0" href="#generalDataTab" aria-controls="generalData" role="tab" data-toggle="tab">General statistics</a></li>
-							<li role="presentation"><a data-id="1" href="#tipsTab" aria-controls="tips" role="tab" data-toggle="tab">Tips</a></li>
-							<li role="presentation"><a data-id="2" href="#photosTab" aria-controls="photos" role="tab" data-toggle="tab">Photos</a></li>
+							<li role="presentation" class="active"><a data-id="0" href="#ltpTab" aria-controls="ltp" role="tab" data-toggle="tab">Likes/Tips/Photos</a></li>
+							<li role="presentation"><a data-id="1" href="#ucTab" aria-controls="uc" role="tab" data-toggle="tab">Users/Checkins</a></li>
+							<li role="presentation"><a data-id="2" href="#tipsTab" aria-controls="tips" role="tab" data-toggle="tab">Tips by date</a></li>
+							<li role="presentation"><a data-id="3" href="#photosTab" aria-controls="photos" role="tab" data-toggle="tab">Photos by date</a></li>
 						</ul>
 						<div class="tab-content">
-						<div role="tabpanel" class="tab-pane active" id="generalDataTab">
-							<div id="chartVenueGeneralData" style="height: 500px; width: 100%;"></div>
+						<div role="tabpanel" class="tab-pane active" id="ltpTab">
+							<div id="chartVenueLTP" style="height: 500px; width: 100%;"></div>
+						</div>
+						<div role="tabpanel" class="tab-pane" id="ucTab">
+							<div id="chartVenueUC" style="height: 500px; width: 100%;"></div>
 						</div>
 						<div role="tabpanel" class="tab-pane" id="tipsTab">
 							<div id="chartVenueTips" style="height: 500px; width: 100%;"></div>
@@ -152,60 +159,61 @@
 	
 		<div id="ratingStats" class="container hide">
 			<div class="panel panel-default">
-                <div class="panel-heading"><h4>Statistics by rating: Top 10 venues</h4></div>
+                <div class="panel-heading"><h4>Statistics by rating: Top 5 venues</h4></div>
                 <div class="panel-body">
-                    <div id="chartVenuesRatings" style="height: 500px; width: 100%;">
-					</div>
+                    <div id="chartVenuesRatings1" style="height: 500px; width: 100%;"></div>
                 </div>
             </div>
 		</div>
 	
 		<div id="usersStats" class="container hide">
 			<div class="panel panel-default">
-                <div class="panel-heading"><h4>Statistics by users: Top 10 venues</h4></div>
+                <div class="panel-heading"><h4>Statistics by number of users: Top 5 venues</h4></div>
                 <div class="panel-body">  
-                    <div id="chartVenuesUsers" style="height: 500px; width: 100%;">
-					</div>
+                    <div id="chartVenuesUsers1" style="height: 500px; width: 100%;"></div>
+					<br><hr><br>
+                    <div id="chartVenuesUsers2" style="height: 500px; width: 100%;"></div>
+					<br><hr><br>
+                    <div id="chartVenuesUsers3" style="height: 500px; width: 100%;"></div>
                 </div>
             </div>
 		</div>
-	
+		
 		<div id="tipsStats" class="container hide">
 			<div class="panel panel-default">
-                <div class="panel-heading"><h4>Statistics by tips: Top 10 venues</h4></div>
+                <div class="panel-heading"><h4>Statistics by number of tips: Top 5 venues</h4></div>
                 <div class="panel-body">
-					<div id="chartVenuesTips" style="height: 500px; width: 100%;">
-					</div>	
+					<div id="chartVenuesTips1" style="height: 500px; width: 100%;"></div>
+					<br><hr><br>
+					<div id="chartVenuesTips2" style="height: 500px; width: 100%;"></div>
+					<br><hr><br>
+					<div id="chartVenuesTips3" style="height: 500px; width: 100%;"></div>
                 </div>
             </div>
 		</div>
 	
 		<div id="photosStats" class="container hide">
 			<div class="panel panel-default">
-                <div class="panel-heading"><h4>Statistics by photos: Top 10 venues</h4></div>
+                <div class="panel-heading"><h4>Statistics by number of photos: Top 5 venues</h4></div>
                 <div class="panel-body">
-					<div id="chartVenuesPhotos" style="height: 500px; width: 100%;">
-					</div>	
-                </div>
-            </div>
-		</div>
-	
-		<div id="hereNowStats" class="container hide">
-			<div class="panel panel-default">
-                <div class="panel-heading"><h4>Statistics by here now: Top 10 venues</h4></div>
-                <div class="panel-body">
-					<div id="chartVenuesHereNow" style="height: 500px; width: 100%;">
-					</div>	
+					<div id="chartVenuesPhotos1" style="height: 500px; width: 100%;"></div>
+					<br><hr><br>
+					<div id="chartVenuesPhotos2" style="height: 500px; width: 100%;"></div>
+					<br><hr><br>
+					<div id="chartVenuesPhotos3" style="height: 500px; width: 100%;"></div>
                 </div>
             </div>
 		</div>
 	
 		<div id="checkinsStats" class="container hide">
 			<div class="panel panel-default">
-                <div class="panel-heading"><h4>Statistics by checkins: Top 10 venues</h4></div>
+                <div class="panel-heading"><h4>Statistics by number of checkins: Top 10 venues</h4></div>
                 <div class="panel-body">
-                    <div id="chartVenuesCheckins" style="height: 500px; width: 100%;">
-					</div>
+                    <div id="chartVenuesCheckins1" style="height: 500px; width: 100%;"></div>
+					<br><hr><br>
+                    <div id="chartVenuesCheckins2" style="height: 500px; width: 100%;"></div>
+					<br><hr><br>
+                    <div id="chartVenuesCheckins3" style="height: 500px; width: 100%;"></div>
                 </div>
             </div>
 		</div>
@@ -213,11 +221,11 @@
 		<div id="documentation" class="container hide">
 			<div class="row">
 				<div class="rowcenter col-md-9 col-sm-9">
-				  <h2>The idea</h2>
+				  <h2>Main goal</h2>
 				  <div class="row">
 					<div class="col-xs-12">
 						<p>
-						The idea of this project is to explore the <a target="_blank" href="http://canvasjs.com/">CanvasJS</a> library, which is a JavaScript library
+						Main goal of this project is to explore the <a target="_blank" href="http://canvasjs.com/">CanvasJS</a> library, which is a JavaScript library
 						used for creating various numbers of beautiful charts. In this project I have created a simple web application
 						which is called 4Stats and it is using the <a target="_blank" href="http://canvasjs.com/">CanvasJS</a> library.
 						</p>
@@ -244,7 +252,6 @@
 							<li>Top 5 venues by number of users</li>
 							<li>Top 5 venues by number of tips</li>
 							<li>Top 5 venues by number of photos</li>
-							<li>Top 5 venues by number of currently checked users or "Here now"</li>
 							<li>Top 5 venues by number of checkins</li>
 						</ul>
 						<p>
@@ -429,4 +436,5 @@
 		</div>
 		
 	</body>
+	
 </html> 

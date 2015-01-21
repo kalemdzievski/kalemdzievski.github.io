@@ -84,6 +84,7 @@
 		
 		getVenue($(".venue.active").data('id'), token);	
 		venues.sort(compareVenuesByRating);
+		showAllGeneralCharts(venues);
 	}
 		
 	function getVenue(id, token) {
@@ -105,10 +106,13 @@
 					var venueUsers = venue['stats']['usersCount'];
 					var venueTips = venue['stats']['tipCount'];
 					
-					var venueGeneralData = {
+					var venueLTP = {
 						"likes": venueLikes,
 						"tips": venueTips,
-						"photos": venuePhotos,
+						"photos": venuePhotos
+					};
+					
+					var venueUC = {
 						"checkins": venueCheckins,
 						"users": venueUsers
 					};
@@ -122,7 +126,7 @@
 					
 					var tipsDates = []
 					for(var i=0; i<tipsItems.length; i++)
-						tipsDates.push(tipsItems[i]['createdAt']);
+						tipsDates.push({"date": tipsItems[i]['createdAt'], "text": tipsItems[i]['text']});
 						
 					var photosItems = venue['photos']['groups'][0]['items'];
 					var photosDates = []
@@ -130,7 +134,8 @@
 						photosDates.push(photosItems[i]['createdAt']);
 
 					venueData = {
-						"generalData": venueGeneralData,
+						"ltp": venueLTP,
+						"uc": venueUC,
 						"tipsDates": tipsDates,
 						"photosDates": photosDates
 					}
@@ -147,7 +152,8 @@
 		});
 		
 		$("#venueName").text($(".venue.active").text());
-		showVenueGeneralDataChart(venueData['generalData']);
+		showVenueLTPChart(venueData['ltp']);
+		showVenueUCChart(venueData['uc']);
 		showVenueTipsChart(venueData['tipsDates']);
 		showVenuePhotosChart(venueData['photosDates']);
 	}
@@ -183,14 +189,6 @@
 		return 0;
 	}
 	
-	function compareVenuesByHereNow(venue1, venue2) {
-		if (venue1.hereNow < venue2.hereNow)
-			return 1;
-		if (venue1.hereNow > venue2.hereNow)
-			return -1;
-		return 0;
-	}
-	
 	function compareVenuesByTips(venue1, venue2) {
 		if (venue1.tips < venue2.tips)
 			return 1;
@@ -207,10 +205,16 @@
 		return 0;
 	}
 	
-	function showVenuesRatingsChart(venuesData) {
-		var chartVenuesRatings = new CanvasJS.Chart("chartVenuesRatings", {
+	function showVenuesRatingsCharts(venues) {
+		var venuesCopy = venues.slice();
+		venuesCopy.sort(compareVenuesByRating);
+		var venuesData = [];
+		for(var i=0; i<TOP; i++) {
+			venuesData.push({"y": venues[i]['rating'], "label": venues[i]['name']});
+		}
+		var chartVenuesRatings1 = new CanvasJS.Chart("chartVenuesRatings1", {
 			title:{
-				text: "Top 10 venues by rating"    
+				text: "Top " + TOP + " venues by rating"    
 			},
 			axisY: {
 				title: "Rating"
@@ -229,18 +233,24 @@
 			]
 		});
 		setTimeout(function(){
-			chartVenuesRatings.render();
+			chartVenuesRatings1.render();
 		},10);
 	}
 
-	function showVenuesUsersChart(venuesData) {
-		var chartVenuesUsers = new CanvasJS.Chart("chartVenuesUsers", {
+	function showVenuesUsersCharts(venues) {
+		var venuesCopy = venues.slice();
+		venuesCopy.sort(compareVenuesByUsers);
+		var venuesData = [];
+		for(var i=0; i<TOP; i++) {
+			venuesData.push({"y": venuesCopy[i]['users'], "label": venuesCopy[i]['name']});
+		}
+		var chartVenuesUsers1 = new CanvasJS.Chart("chartVenuesUsers1", {
 			theme: "theme2",
 			title:{ 
-				text: "Top 10 venus by number of tips"
+				text: "Top " + TOP + " venues by number of users"
 			},
 			axisY: {				
-				title: "Number of People"
+				title: "Number of users"
 			},					
 			legend:{
 				verticalAlign: "top",
@@ -255,13 +265,9 @@
 				dataPoints: venuesData
 			}]
 		});
-		setTimeout(function(){
-			chartVenuesUsers.render();
-		},10);
-		
 		var chartVenuesUsers2 = new CanvasJS.Chart("chartVenuesUsers2", {
 			title:{
-				text: "Top " + TOP + " venues by users"
+				text: "Top " + TOP + " venues by number of users"
 			},
 			animationEnabled: true,
 			legend:{
@@ -281,20 +287,57 @@
 				}
 			]
 		});
+		var chartVenuesUsers3 = new CanvasJS.Chart("chartVenuesUsers3", {
+			title:{
+				text: "Top " + TOP + " venues by number of users"
+			},
+            animationEnabled: true,
+			axisX:{
+				interval: 1,
+				gridThickness: 0,
+				labelFontSize: 10,
+				labelFontStyle: "normal",
+				labelFontWeight: "normal",
+				labelFontFamily: "Lucida Sans Unicode"
+
+			},
+			axisY2:{
+				interlacedColor: "rgba(1,77,101,.2)",
+				gridColor: "rgba(1,77,101,.1)"
+			},
+			data: [
+				{     
+					type: "bar",
+					name: "companies",
+					axisYType: "secondary",
+					color: "#014D65",				
+					dataPoints: venuesData
+				}
+			]
+		});
+		
 		setTimeout(function(){
+			chartVenuesUsers1.render();
 			chartVenuesUsers2.render();
+			chartVenuesUsers3.render();
 		},10);
 	}
 	
-	function showVenuesTipsChart(venuesData) {
-		var chartVenuesTips = new CanvasJS.Chart("chartVenuesTips", {
-			theme: "theme2",
+	function showVenuesTipsCharts(venues) {
+		var venuesCopy = venues.slice();
+		venuesCopy.sort(compareVenuesByTips);
+		var venuesData = [];
+		for(var i=0; i<TOP; i++) {
+			venuesData.push({"y": venuesCopy[i]['tips'], "label": venuesCopy[i]['name']});
+		}
+		var chartVenuesTips1 = new CanvasJS.Chart("chartVenuesTips1", {
 			title:{ 
-				text: "Top 10 venus by number of tips"
+				text: "Top " + TOP + " venues by number of tips"
 			},
 			axisY: {				
-				title: "Number of People"
-			},					
+				title: "Number of tips"
+			},	
+			theme: "theme2",				
 			legend:{
 				verticalAlign: "top",
 				horizontalAlign: "centre",
@@ -308,15 +351,118 @@
 				dataPoints: venuesData
 			}]
 		});
+		var chartVenuesTips2 = new CanvasJS.Chart("chartVenuesTips2", {
+			title:{
+				text: "Top " + TOP + " venues by number of tips"
+			},
+			animationEnabled: true,
+			legend:{
+				verticalAlign: "bottom",
+				horizontalAlign: "center"
+			},
+			data: [
+				{        
+					indexLabelFontSize: 20,
+					indexLabelFontFamily: "Monospace",       
+					indexLabelFontColor: "darkgrey", 
+					indexLabelLineColor: "darkgrey",        
+					indexLabelPlacement: "outside",
+					type: "pie",       
+					toolTipContent: "{label}: {y} - <strong>#percent%</strong>",
+					dataPoints: venuesData
+				}
+			]
+		});
+		var chartVenuesTips3 = new CanvasJS.Chart("chartVenuesTips3", {
+			title:{
+				text: "Top " + TOP + " venues by number of tips"
+			},
+            animationEnabled: true,
+			axisX:{
+				interval: 1,
+				gridThickness: 0,
+				labelFontSize: 10,
+				labelFontStyle: "normal",
+				labelFontWeight: "normal",
+				labelFontFamily: "Lucida Sans Unicode"
+
+			},
+			axisY2:{
+				interlacedColor: "rgba(1,77,101,.2)",
+				gridColor: "rgba(1,77,101,.1)"
+			},
+			data: [
+				{     
+					type: "bar",
+					name: "companies",
+					axisYType: "secondary",
+					color: "#014D65",				
+					dataPoints: venuesData
+				}
+			]
+		});
+		
 		setTimeout(function(){
-			chartVenuesTips.render();
+			chartVenuesTips1.render();
+			chartVenuesTips2.render();
+			chartVenuesTips3.render();
 		},10);
 	}
 	
-	function showVenuesPhotosChart(venuesData) {
-		var chartVenuesPhotos = new CanvasJS.Chart("chartVenuesPhotos", {
+	function showVenuesPhotosCharts(venues) {
+	
+		var venuesCopy = venues.slice();
+		venuesCopy.sort(compareVenuesByPhotos);
+		var venuesData = [];
+		for(var i=0; i<TOP; i++) {
+			venuesData.push({"y": venuesCopy[i]['photos'], "label": venuesCopy[i]['name']});
+		}
+		var chartVenuesPhotos1 = new CanvasJS.Chart("chartVenuesPhotos1", {
+			title:{ 
+				text: "Top " + TOP + " venues by number of photos"
+			},
+			axisY: {				
+				title: "Number of photos"
+			},	
+			theme: "theme2",				
+			legend:{
+				verticalAlign: "top",
+				horizontalAlign: "centre",
+				fontSize: 16
+
+			},
+			data : [{
+				type: "column",
+				legendMarkerType: "none",	
+				indexLabel: "{y}",
+				dataPoints: venuesData
+			}]
+		});
+		var chartVenuesPhotos2 = new CanvasJS.Chart("chartVenuesPhotos2", {
 			title:{
-				text: "Top 10 venus by number of photos"	
+				text: "Top " + TOP + " venues by number of photos"
+			},
+			animationEnabled: true,
+			legend:{
+				verticalAlign: "bottom",
+				horizontalAlign: "center"
+			},
+			data: [
+				{        
+					indexLabelFontSize: 20,
+					indexLabelFontFamily: "Monospace",       
+					indexLabelFontColor: "darkgrey", 
+					indexLabelLineColor: "darkgrey",        
+					indexLabelPlacement: "outside",
+					type: "pie",       
+					toolTipContent: "{label}: {y} - <strong>#percent%</strong>",
+					dataPoints: venuesData
+				}
+			]
+		});
+		var chartVenuesPhotos3 = new CanvasJS.Chart("chartVenuesPhotos3", {
+			title:{
+				text: "Top " + TOP + " venues by number of photos"
 			},
             animationEnabled: true,
 			axisX:{
@@ -343,48 +489,44 @@
 			]
 		});
 		setTimeout(function(){
-			chartVenuesPhotos.render();
+			chartVenuesPhotos1.render();
+			chartVenuesPhotos2.render();
+			chartVenuesPhotos3.render();
 		},10);
 	}
 	
-	function showVenuesHereNowChart(venuesData) {
-		var chartVenuesHereNow = new CanvasJS.Chart("chartVenuesHereNow", {
-			title:{
-				text: "Top 10 venus by here now"	
+	function showVenuesCheckinsCharts(venues) {
+	
+		var venuesCopy = venues.slice();
+		venuesCopy.sort(compareVenuesByCheckins);
+		var venuesData = [];
+		for(var i=0; i<TOP; i++) {
+				venuesData.push({"y": venuesCopy[i]['checkins'], "legendText": venuesCopy[i]['name'], "label": venuesCopy[i]['name']});
+		}
+		var chartVenuesCheckins1 = new CanvasJS.Chart("chartVenuesCheckins1", {
+			title:{ 
+				text: "Top " + TOP + " venues by number of checkins"
 			},
-            animationEnabled: true,
-			axisX:{
-				interval: 1,
-				gridThickness: 0,
-				labelFontSize: 10,
-				labelFontStyle: "normal",
-				labelFontWeight: "normal",
-				labelFontFamily: "Lucida Sans Unicode"
+			axisY: {				
+				title: "Number of checkins"
+			},	
+			theme: "theme2",				
+			legend:{
+				verticalAlign: "top",
+				horizontalAlign: "centre",
+				fontSize: 16
 
 			},
-			axisY2:{
-				interlacedColor: "rgba(1,77,101,.2)",
-				gridColor: "rgba(1,77,101,.1)"
-			},
-			data: [
-				{     
-					type: "bar",
-					name: "Venues",
-					axisYType: "secondary",
-					color: "#014D65",				
-					dataPoints: venuesData
-				}
-			]
+			data : [{
+				type: "column",
+				legendMarkerType: "none",	
+				indexLabel: "{y}",
+				dataPoints: venuesData
+			}]
 		});
-		setTimeout(function(){
-			chartVenuesHereNow.render();
-		},10);
-	}
-	
-	function showVenuesCheckinsChart(venuesData) {
-		var chartVenuesCheckins = new CanvasJS.Chart("chartVenuesCheckins", {
+		var chartVenuesCheckins2 = new CanvasJS.Chart("chartVenuesCheckins2", {
 			title:{
-				text: "Top " + TOP + " venues by checkins"
+				text: "Top " + TOP + " venues by number of checkins"
 			},
 			animationEnabled: true,
 			legend:{
@@ -404,40 +546,103 @@
 				}
 			]
 		});
+		var chartVenuesCheckins3 = new CanvasJS.Chart("chartVenuesCheckins3", {
+			title:{
+				text: "Top " + TOP + " venues by number of checkins"
+			},
+            animationEnabled: true,
+			axisX:{
+				interval: 1,
+				gridThickness: 0,
+				labelFontSize: 10,
+				labelFontStyle: "normal",
+				labelFontWeight: "normal",
+				labelFontFamily: "Lucida Sans Unicode"
+
+			},
+			axisY2:{
+				interlacedColor: "rgba(1,77,101,.2)",
+				gridColor: "rgba(1,77,101,.1)"
+			},
+			data: [
+				{     
+					type: "bar",
+					name: "companies",
+					axisYType: "secondary",
+					color: "#014D65",				
+					dataPoints: venuesData
+				}
+			]
+		});
 		setTimeout(function(){
-			chartVenuesCheckins.render();
+			chartVenuesCheckins1.render();
+			chartVenuesCheckins2.render();
+			chartVenuesCheckins3.render();
 		},10);
 	}
 	
-	function showVenueGeneralDataChart(venuesData) {
+	function showVenueLTPChart(venuesData) {
 		var chartData = [];
 		$.each(venuesData, function (key, val) {
 			chartData.push({"y": val, "label": key});
 		});
-		var chartVenueGeneralData = new CanvasJS.Chart("chartVenueGeneralData", {
+		var chartVenueLTP = new CanvasJS.Chart("chartVenueLTP", {
 			title:{
-			text: "General statistics"    
-		  },
-		  animationEnabled: true,
-		  axisY: {
-			title: "Count"
-		  },
-		  legend: {
-			verticalAlign: "bottom",
-			horizontalAlign: "center"
-		  },
-		  theme: "theme2",
-		  data: [
-
-		  {        
-			type: "column",  
-			showInLegend: true, 
-			legendMarkerColor: "grey",
-			dataPoints: chartData
-		  }   
-		  ]
+				text: "Likes / Tips / Photos"
+			},
+			animationEnabled: true,
+			legend:{
+				verticalAlign: "bottom",
+				horizontalAlign: "center"
+			},
+			data: [
+				{        
+					indexLabelFontSize: 20,
+					indexLabelFontFamily: "Monospace",       
+					indexLabelFontColor: "darkgrey", 
+					indexLabelLineColor: "darkgrey",        
+					indexLabelPlacement: "outside",
+					type: "pie",       
+					toolTipContent: "{label}: {y} - <strong>#percent%</strong>",
+					dataPoints: chartData
+				}
+			]
 		});
-		chartVenueGeneralData.render();
+		setTimeout(function(){
+			chartVenueLTP.render();
+		},10);
+	}
+	
+	function showVenueUCChart(venuesData) {
+		var chartData = [];
+		$.each(venuesData, function (key, val) {
+			chartData.push({"y": val, "label": key});
+		});
+		var chartVenueUC = new CanvasJS.Chart("chartVenueUC", {
+			title:{
+				text: "Users / Checkins"
+			},
+			animationEnabled: true,
+			legend:{
+				verticalAlign: "bottom",
+				horizontalAlign: "center"
+			},
+			data: [
+				{        
+					indexLabelFontSize: 20,
+					indexLabelFontFamily: "Monospace",       
+					indexLabelFontColor: "darkgrey", 
+					indexLabelLineColor: "darkgrey",        
+					indexLabelPlacement: "outside",
+					type: "pie",       
+					toolTipContent: "{label}: {y} - <strong>#percent%</strong>",
+					dataPoints: chartData
+				}
+			]
+		});
+		setTimeout(function(){
+			chartVenueUC.render();
+		},10);
 	}
 	
 	function showVenueTipsChart(venuesData) {
@@ -446,8 +651,8 @@
 		for(var i=0; i<venuesData.length; i++)
 		{
 			var date = new Date(0);
-			date.setUTCSeconds(venuesData[i]);
-			data.push({"x": date, "y": date.getHours(), "name": "Tip"});
+			date.setUTCSeconds(venuesData[i]['date']);
+			data.push({"x": date, "y": date.getHours(), "name": venuesData[i]['text']});
 		}
 		var chartVenueTips = new CanvasJS.Chart("chartVenueTips", {
 			title:{
@@ -471,12 +676,14 @@
 			data: [
 			{        
 				type: "scatter",  
-				toolTipContent: "<span style='\"'color: {color};'\"'><strong>Tip</strong></span> <br/> <strong>Hour</strong> {y} h<br/> <strong>Date</strong> {x} ",
+				toolTipContent: "<span style='\"'color: {color};'\"'><strong>{name}</strong></span> <br/> <strong>Hour</strong> {y} h<br/> <strong>Date</strong> {x} ",
 				dataPoints: data
 			}
 			]
 		});
-		chartVenueTips.render();
+		setTimeout(function(){
+			chartVenueTips.render();
+		},10);
 	}
 	
 	function showVenuePhotosChart(venuesData) {
@@ -509,12 +716,22 @@
 			data: [
 			{        
 				type: "scatter",  
-				toolTipContent: "<span style='\"'color: {color};'\"'><strong>Tip</strong></span> <br/> <strong>Hour</strong> {y} h<br/> <strong>Date</strong> {x} ",
+				toolTipContent: "<span style='\"'color: {color};'\"'><strong>Photo</strong></span> <br/> <strong>Hour</strong> {y} h<br/> <strong>Date</strong> {x} ",
 				dataPoints: data
 			}
 			]
 		});
-		chartVenuePhotos.render();
+		setTimeout(function(){
+			chartVenuePhotos.render();
+		},10);
+	}
+	
+	function showAllGeneralCharts(venues) {
+		showVenuesRatingsCharts(venues);
+		showVenuesUsersCharts(venues);
+		showVenuesPhotosCharts(venues)
+		showVenuesTipsCharts(venues);
+		showVenuesCheckinsCharts(venues);
 	}
 	
 	function hideAll() {
@@ -558,7 +775,7 @@
 	function showLoader() {
         $(".fakeloader").fakeLoader({
             bgColor: "rgba(0,0,0,0.7)",
-			zIndex:"999",
+			zIndex:"9999999",
             spinner: "spinner2"
         });
     }
@@ -587,9 +804,6 @@ $(document).ready(function () {
 				config.city = city;
 				getVenues(category, token);
 			}
-			else {
-			
-			}
 		});
 		
 		$("#btnMain").click(function () {
@@ -604,96 +818,49 @@ $(document).ready(function () {
 		});
 		
 		$("#btnRating").click(function () {
-			var venuesCopy = venues.slice();
-			venuesCopy.sort(compareVenuesByRating);
-			var venuesData = [];
-			for(var i=0; i<TOP; i++) {
-				venuesData.push({"y": venues[i]['rating'], "label": venues[i]['name']});
-			}
-			showVenuesRatingsChart(venuesData);
+			showVenuesRatingsCharts(venues);
 			hideAll();
 			$("#ratingStats").removeClass('hide');
 		});
 		
 		$("#btnUsers").click(function () {
-			var venuesCopy = venues.slice();
-			venuesCopy.sort(compareVenuesByUsers);
-			var venuesData = [];
-			for(var i=0; i<TOP; i++) {
-				venuesData.push({"y": venuesCopy[i]['users'], "label": venuesCopy[i]['name']});
-			}
-			showVenuesUsersChart(venuesData);
+			showVenuesUsersCharts(venues);
 			hideAll();
 			$("#usersStats").removeClass('hide');
 		});
 		
 		$("#btnTips").click(function () {
-			var venuesCopy = venues.slice();
-			venuesCopy.sort(compareVenuesByTips);
-			var venuesData = [];
-			for(var i=0; i<TOP; i++) {
-				venuesData.push({"y": venuesCopy[i]['tips'], "label": venuesCopy[i]['name']});
-			}
-			showVenuesTipsChart(venuesData);
+			showVenuesTipsCharts(venues);
 			hideAll();
 			$("#tipsStats").removeClass('hide');
 		});
 		
 		$("#btnPhotos").click(function () {
-			var venuesCopy = venues.slice();
-			venuesCopy.sort(compareVenuesByPhotos);
-			var venuesData = [];
-			for(var i=0; i<TOP; i++) {
-				venuesData.push({"y": venuesCopy[i]['photos'], "label": venuesCopy[i]['name']});
-			}
-			showVenuesPhotosChart(venuesData);
+			showVenuesPhotosCharts(venues);
 			hideAll();
 			$("#photosStats").removeClass('hide');
 		});
 		
-		$("#btnHereNow").click(function () {
-			var venuesCopy = venues.slice();
-			venuesCopy.sort(compareVenuesByHereNow);
-			var venuesData = [];
-			for(var i=0; i<TOP; i++) {
-				venuesData.push({"y": venuesCopy[i]['hereNow'], "label": venuesCopy[i]['name']});
-			}
-			showVenuesHereNowChart(venuesData);
-			hideAll();
-			$("#hereNowStats").removeClass('hide');
-		});
-		
 		$("#btnCheckins").click(function () {
-			var venuesCopy = venues.slice();
-			venuesCopy.sort(compareVenuesByCheckins);
-			var venuesData = [];
-			for(var i=0; i<TOP; i++) {
-				venuesData.push({"y": venuesCopy[i]['checkins'], "legendText": venuesCopy[i]['name'], "label": venuesCopy[i]['name']});
-			}
-			showVenuesCheckinsChart(venuesData);
+			showVenuesCheckinsCharts(venues);
 			hideAll();
 			$("#checkinsStats").removeClass('hide');
 		});
 		
 		$(document).on('shown.bs.tab', 'a[data-toggle="tab"]', function (e) {
 			if($(this).data('id') == 0){
-				setTimeout(function(){
-					showVenueGeneralDataChart(venueData['generalData']);
-				},10);
+				showVenueLTPChart(venueData['ltp']);
 			}
 			else if($(this).data('id') == 1){
-				setTimeout(function(){
-					showVenueTipsChart(venueData['tipsDates']);
-				},10);
+				showVenueUCChart(venueData['uc']);
 			}
 			else if($(this).data('id') == 2){
-				setTimeout(function(){
-					showVenuePhotosChart(venueData['photosDates']);
-				},10);
+				showVenueTipsChart(venueData['tipsDates']);
+			}
+			else if($(this).data('id') == 3){
+				showVenuePhotosChart(venueData['photosDates']);
 			}
 		});
-		
-		
 		
 		$("#documentationLink").click(function () {
 			hideAll();
