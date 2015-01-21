@@ -569,21 +569,38 @@
 	
 $(document).ready(function () {
 	
-	var token = window.location.hash.split("=")[1];
+	//var token = window.location.hash.split("=")[1];
+	var token = "HLT4UTYZGZXWPBZCHNJHXDSDWK221H41HNRQS4EPCHAM0VMK";
 	if(token) {
 	
 		connected();
 		getVenues(category, token);
 		
-		$(".venueCategory").click(function () {
+		$(".venuesCategory").click(function () {
 			category = $(this).data('id');
-			$("#venuesCategoryName").text(config.categoryNames[category]);
 			getVenues(category, token);
+		});
+		
+		$(".venuesCity").click(function () {
+			city = $(this).data('id');
+			if(city != "enter") {
+				config.city = city;
+				getVenues(category, token);
+			}
+			else {
+			
+			}
 		});
 		
 		$("#btnMain").click(function () {
 			hideAll();
 			$("#mainStats").removeClass('hide');
+		});
+		
+		$("#btnAddCity").click(function () {
+			config.city = $("#txtCity").val();
+			getVenues(category, token);
+			$('#newCity').modal('hide');
 		});
 		
 		$("#btnRating").click(function () {

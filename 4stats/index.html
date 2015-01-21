@@ -17,6 +17,27 @@
 	</head>
 	
 	<body style="padding-top: 70px;">
+		
+		<div class="modal fade" id="newCity" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title">Add new city</h4>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<label for="txtCity">City:</label>
+							<input type="text" class="form-control" id="txtCity" placeholder="English name for the city">
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button id="btnAddCity" type="button" class="btn btn-primary">Add</button>
+					</div>
+				</div>
+			</div>
+		</div>
 
 		<div class="fakeloader"></div>
 		
@@ -54,15 +75,25 @@
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li class="dropdown">
+							<a href="#" data-toggle="dropdown" class="dropdown-toggle">City <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a data-id="Skopje" class="venuesCity" href="#">Skopje</a></li>
+								<li><a data-id="Ohrid" class="venuesCity" href="#">Ohrid</a></li>
+								<li><a data-id="Bitola" class="venuesCity" href="#">Bitola</a></li>
+								<li role="presentation" class="divider"></li>
+								<li><a data-id="enter" class="venuesCity" href="#" data-toggle="modal" data-target="#newCity">Add new city</a></li>
+							</ul>
+						</li>
+						<li class="dropdown">
 							<a href="#" data-toggle="dropdown" class="dropdown-toggle">Category <b class="caret"></b></a>
 							<ul class="dropdown-menu">
-								<li><a data-id="0" class="venueCategory" href="#">Pizza restaurants</a></li>
-								<li><a data-id="1" class="venueCategory" href="#">Restaurants</a></li>
-								<li><a data-id="2" class="venueCategory" href="#">Bars</a></li>
-								<li><a data-id="3" class="venueCategory" href="#">Cockatils</a></li>
-								<li><a data-id="4" class="venueCategory" href="#">Lounges</a></li>
-								<li><a data-id="5" class="venueCategory" href="#">Night clubs</a></li>
-								<li><a data-id="6" class="venueCategory" href="#">Cafes</a></li>
+								<li><a data-id="0" class="venuesCategory" href="#">Pizza restaurants</a></li>
+								<li><a data-id="1" class="venuesCategory" href="#">Restaurants</a></li>
+								<li><a data-id="2" class="venuesCategory" href="#">Bars</a></li>
+								<li><a data-id="3" class="venuesCategory" href="#">Cockatils</a></li>
+								<li><a data-id="4" class="venuesCategory" href="#">Lounges</a></li>
+								<li><a data-id="5" class="venuesCategory" href="#">Night clubs</a></li>
+								<li><a data-id="6" class="venuesCategory" href="#">Cafes</a></li>
 							</ul>
 						</li>
 					</ul>
@@ -182,75 +213,122 @@
 		<div id="documentation" class="container hide">
 			<div class="row">
 				<div class="rowcenter col-md-9 col-sm-9">
-				  <h3>The idea</h3>
+				  <h2>The idea</h2>
 				  <div class="row">
 					<div class="col-xs-12">
-					  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. 
-					  Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis 
-					  dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. 
-					  Aliquam in felis sit amet augue.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. 
-					  Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis 
-					  dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. 
-					  Aliquam in felis sit amet augue.</p>
-					  </div>
+						<p>
+						The idea of this project is to explore the <a target="_blank" href="http://canvasjs.com/">CanvasJS</a> library, which is a JavaScript library
+						used for creating various numbers of beautiful charts. In this project I have created a simple web application
+						which is called 4Stats and it is using the <a target="_blank" href="http://canvasjs.com/">CanvasJS</a> library.
+						</p>
+					</div>
 				  </div>
 				</div>
 			</div>
-			<hr>
+			<br>
+			<hr class="rowcenter col-md-9 col-sm-9">
 			<div class="row">
 				<div class="rowcenter col-md-9 col-sm-9">
-				  <h3>CanvasJS</h3>
+				  <h2>4Stats</h2>
 				  <div class="row">
 					<div class="col-xs-12">
-					  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. 
-					  Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis 
-					  dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. 
-					  Aliquam in felis sit amet augue.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. 
-					  Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis 
-					  dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. 
-					  Aliquam in felis sit amet augue.</p>
-					  </div>
+						<p>
+						4Stats is a simple web application that uses <a target="_blank" href="https://developer.foursquare.com/">Foursquare API</a> to get data for Macedonian local places 
+						or as they are called by <a target="_blank" href="https://developer.foursquare.com/">Foursquare API</a> - Venues, and create simple statistics for them. 
+						The statistics are shown with the beautiful <a target="_blank" href="http://canvasjs.com/">CanvasJS</a> chars in various categories and themes. 
+						4Stats gets the top 50 places in one city, for one category (ex. Pizza restaurants) and creates statistics 
+						for the following categories:
+						</p>
+						<ul>
+							<li>Top 5 venues by rating</li>
+							<li>Top 5 venues by number of users</li>
+							<li>Top 5 venues by number of tips</li>
+							<li>Top 5 venues by number of photos</li>
+							<li>Top 5 venues by number of currently checked users or "Here now"</li>
+							<li>Top 5 venues by number of checkins</li>
+						</ul>
+						<p>
+						Each of these statistics is shown into separate <a target="_blank" href="http://canvasjs.com/">CanvasJS</a> chart with detailed data.
+						4Stats is also showing some simple statistics for each venue separately, like number of likes, 
+						tips, photos, users, checkins.
+						</p>
+					</div>
 				  </div>
 				</div>
 			</div>
-			<hr>
+			<br>
+			<hr class="rowcenter col-md-9 col-sm-9">
 			<div class="row">
 				<div class="rowcenter col-md-9 col-sm-9">
-				  <h3>Other similar technologies</h3>
+				  <h2>CanvasJS</h2>
 				  <div class="row">
 					<div class="col-xs-12">
-					  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. 
-					  Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis 
-					  dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. 
-					  Aliquam in felis sit amet augue.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. 
-					  Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis 
-					  dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. 
-					  Aliquam in felis sit amet augue.</p>
-					  </div>
+						<p>
+						An easy to use <a target="_blank" href="http://www.w3schools.com/html/default.asp">HTML</a> <a target="_blank" href="http://www.w3schools.com/js/">JavaScript</a> Charting library built on Canvas element. 
+						Charts can render across devices including iPhone, iPad, Android, Windows Phone, Desktops, etc. 
+						This allows you to create rich dashboards that can work across devices without compromising on 
+						maintainability or functionality of your web application. 
+						Graphs include several good looking themes and are 10x faster than conventional Flash / SVG based 
+						Libraries – resulting in lightweight, beautiful and responsive dashboards.
+						</p>
+					</div>
 				  </div>
 				</div>
 			</div>
-			<hr>
+			<br>
+			<hr class="rowcenter col-md-9 col-sm-9">
 			<div class="row">
 				<div class="rowcenter col-md-9 col-sm-9">
-				  <h3>Data</h3>
+				  <h2>Other similar technologies</h2>
 				  <div class="row">
 					<div class="col-xs-12">
-					  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. 
-					  Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis 
-					  dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. 
-					  Aliquam in felis sit amet augue.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. 
-					  Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis 
-					  dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. 
-					  Aliquam in felis sit amet augue.</p>
-					  </div>
+						<p>Other similar technologies to <a target="_blank" href="http://canvasjs.com/">CanvasJS</a> are:</p>
+						<ul>
+							<li>
+								<h4><a target="_blank" href="https://developers.google.com/chart/">Google charts</a></h4>
+								<p>
+								Google chart tools are powerful, simple to use, and free. Try out our rich gallery of interactive charts and data tools.
+								</p>
+							</li>
+						  
+							<li>
+								<h4><a target="_blank" href="http://www.highcharts.com/">High charts</a></h4>
+								<p>
+								Used by tens of thousands of developers and 61 out of the world's 100 largest companies, 
+								Highcharts is the simplest yet most flexible charting API on the market.
+								</p>
+							</li>
+							
+							<li>
+								<h4><a target="_blank" href="http://sigmajs.org/">SigmaJS</a></h4>
+								<p>
+								Sigma is a JavaScript library dedicated to graph drawing. It makes easy to publish networks on Web pages, 
+								and allows developers to integrate network exploration in rich Web applications.
+								</p>
+							</li>
+							
+							<li>
+								<h4><a target="_blank" href="http://www.chartjs.org/">ChartJS</a></h4>
+								<p>Simple, clean and engaging charts for designers and developers.</p>
+							</li>
+							
+							<li>
+								<h4><a target="_blank" href="http://d3js.org/">D3.js</a></h4>
+								<p>
+								D3.js is a JavaScript library for manipulating documents based on data. D3 helps you bring data to life using HTML, 
+								SVG and CSS.
+								</p>
+							</li>
+					  </ul>
+					</div>
 				  </div>
 				</div>
 			</div>
-			<hr>
+			<br>
+			<hr class="rowcenter col-md-9 col-sm-9">
 			<div class="row">
 				<div class="rowcenter col-md-9 col-sm-9">
-				  <h3>Technologies used</h3>
+				  <h2>CanvasJS vs The others</h2>
 				  <div class="row">
 					<div class="col-xs-12">
 					  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. 
@@ -264,7 +342,49 @@
 				  </div>
 				</div>
 			</div>
-			<hr>
+			<br>
+			<hr class="rowcenter col-md-9 col-sm-9">
+			<div class="row">
+				<div class="rowcenter col-md-9 col-sm-9">
+				  <h2>Data</h2>
+				  <div class="row">
+					<div class="col-xs-12">
+						<p>
+						All the data 4Stats uses is pulled by the <a target="_blank" href="https://developer.foursquare.com/">Foursquare API</a>.The <a target="_blank" href="https://developer.foursquare.com/">Foursquare API</a> gives you access 
+						to world-class places database and the ability to interact with Foursquare users and merchants.
+						Using simple <a target="_blank" href="http://www.w3schools.com/ajax/">AJAX</a> call and some <a target="_blank" href="http://www.w3schools.com/js/">JavaScript</a> code (can be done with many different technologies) 
+						you are able to get various data not only for local places, but also for users, checkins, tips, 
+						photos, events and etc., in many different categories. The data is returned in <a target="_blank" href="http://www.w3schools.com/json/">JSON</a> format which
+						is very easy to parse. 4Stats uses the <a target="_blank" href="https://developer.foursquare.com/docs/venues/explore">Explore API</a> from Foursquare, that is returning the top 50 places 
+						for one category in specified city. 
+						</p>
+					</div>
+				  </div>
+				</div>
+			</div>
+			<br>
+			<hr class="rowcenter col-md-9 col-sm-9">
+			<div class="row">
+				<div class="rowcenter col-md-9 col-sm-9">
+				  <h2>Technologies used</h2>
+				  <div class="row">
+					<div class="col-xs-12">
+						<ul>
+							<li><a target="_blank" href="http://www.w3schools.com/html/default.asp">HTML</a></li>
+							<li><a target="_blank" href="http://www.w3schools.com/css/">CSS</a></li>
+							<li><a target="_blank" href="http://canvasjs.com/">CanvasJS</a></li>
+							<li><a target="_blank" href="http://getbootstrap.com/">Bootstrap</a></li>
+							<li><a target="_blank" href="http://www.w3schools.com/js/">JavaScript</a></li>
+							<li><a target="_blank" href="http://jquery.com/">jQuery</a></li>
+							<li><a target="_blank" href="http://www.w3schools.com/ajax/">AJAX</a></li>
+							<li><a target="_blank" href="https://developer.foursquare.com/">Foursquare API</a></li>
+							<li><a target="_blank" href="http://www.w3schools.com/json/">JSON</a></li>
+						</ul>
+					</div>
+				  </div>
+				</div>
+			</div>
+			<br>
 		</div>
 		
 		<div class="footer text-center">
@@ -279,20 +399,20 @@
 							<h3>Around the Web</h3>
 							<ul class="list-inline">
 								<li>
-									<a href="https://www.facebook.com/kalemdzievski" class="btn-social btn-outline"><i class="fa fa-fw fa-facebook"></i></a>								</li>
+									<a target="_blank" href="https://www.facebook.com/kalemdzievski" class="btn-social btn-outline"><i class="fa fa-fw fa-facebook"></i></a>								</li>
 								<li>
-									<a href="https://plus.google.com/u/0/102815420758135551721/posts" class="btn-social btn-outline"><i class="fa fa-fw fa-google-plus"></i></a>								</li>
+									<a target="_blank" href="https://plus.google.com/u/0/102815420758135551721/posts" class="btn-social btn-outline"><i class="fa fa-fw fa-google-plus"></i></a>								</li>
 								<li>
-									<a href="skype:nikola.kalemdzievski?add" class="btn-social btn-outline"><i class="fa fa-fw fa-skype"></i></a>								</li>
+									<a target="_blank" href="skype:nikola.kalemdzievski?add" class="btn-social btn-outline"><i class="fa fa-fw fa-skype"></i></a>								</li>
 								<li>
-									<a href="https://www.linkedin.com/profile/view?id=344811180&trk=nav_responsive_tab_profile" class="btn-social btn-outline"><i class="fa fa-fw fa-linkedin"></i></a>								</li>
+									<a target="_blank" href="https://www.linkedin.com/profile/view?id=344811180&trk=nav_responsive_tab_profile" class="btn-social btn-outline"><i class="fa fa-fw fa-linkedin"></i></a>								</li>
 								<li>
-									<a href="https://github.com/kalemdzievski" class="btn-social btn-outline"><i class="fa fa-fw fa-github"></i></a>								</li>
+									<a target="_blank" href="https://github.com/kalemdzievski" class="btn-social btn-outline"><i class="fa fa-fw fa-github"></i></a>								</li>
 							</ul>
 						</div>
 						<div class="footer-col col-md-4">
 							<h3>Contact</h3>
-							<p><a href="mailto:nikola.kalemdzievski@gmail.com">nikola.kalemdzievski@gmail.com</a><br>+389 70 962 344</p>
+							<p><a href="mailto:nikola.kalemdzievski@gmail.com">nikola.kalemdzievski@gmail.com</a></p>
 						</div>
 					</div>
 				</div>
@@ -301,7 +421,7 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-lg-12">
-							Created by Kalemdzievski 2014
+							Created by Kalemdzievski 2015
 						</div>
 					</div>
 				</div>
