@@ -787,6 +787,21 @@
 $(document).ready(function () {
 	
 	var token = window.location.hash.split("=")[1];
+		
+	$("#btnMain").click(function () {
+		hideAll();
+		if(token)
+			$("#mainStats").removeClass('hide');
+		else
+			$("#connectContainer").removeClass('hide');
+	});
+		
+	$("#documentationLink").click(function () {
+		$("#connectContainer").addClass('hide');
+		hideAll();
+		$("#documentation").removeClass('hide');
+	});
+	
 	if(token) {
 	
 		connected();
@@ -803,11 +818,6 @@ $(document).ready(function () {
 				config.city = city;
 				getVenues(category, token);
 			}
-		});
-		
-		$("#btnMain").click(function () {
-			hideAll();
-			$("#mainStats").removeClass('hide');
 		});
 		
 		$("#btnAddCity").click(function () {
@@ -860,10 +870,7 @@ $(document).ready(function () {
 				showVenuePhotosChart(venueData['photosDates']);
 			}
 		});
-		
-		$("#documentationLink").click(function () {
-			hideAll();
-			$("#documentation").removeClass('hide');
-		});
 	}
+	
+	
 });
