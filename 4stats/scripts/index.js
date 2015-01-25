@@ -788,6 +788,8 @@
 	function changeCity(obj) {
 		city = $(obj).data('id');
 		if(city != "enter") {
+			$("#citiesList li").removeClass("active");
+			$(obj).parent().addClass("active");
 			config.city = city;
 			$(".venuesCityName").text(config.city);
 			getVenues(category, token);
@@ -796,7 +798,8 @@
 	
 $(document).ready(function () {
 	
-	token = window.location.hash.split("=")[1];
+	//token = window.location.hash.split("=")[1];
+	token = "HLT4UTYZGZXWPBZCHNJHXDSDWK221H41HNRQS4EPCHAM0VMK";
 		
 	$("#btnMain").click(function () {
 		hideAll();
@@ -818,6 +821,8 @@ $(document).ready(function () {
 		getVenues(category, token);
 		
 		$(".venuesCategory").click(function () {
+			$("#categoriesList li").removeClass("active");
+			$(this).parent().addClass("active");
 			category = $(this).data('id');
 			$(".venuesCategoryName").text(config.categoryNames[category]);
 			getVenues(category, token);
@@ -826,7 +831,8 @@ $(document).ready(function () {
 		$("#btnAddCity").click(function () {
 			config.city = $("#txtCity").val();
 			$(".venuesCityName").text(config.city);
-			var liEl = '<li><a data-id="' + config.city + '" onclick="javascript:changeCity(this);" href="#">' + config.city + '</a></li>';
+			$("#citiesList li").removeClass("active");
+			var liEl = '<li class="active"><a data-id="' + config.city + '" onclick="javascript:changeCity(this);" href="#">' + config.city + '</a></li>';
 			$("#citiesList").prepend(liEl);
 			getVenues(category, token);
 			$('#newCity').modal('hide');
