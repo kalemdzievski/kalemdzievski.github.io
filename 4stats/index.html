@@ -12,10 +12,10 @@
 		<link rel="stylesheet" href="styles/social-buttons-3.css" />
 		<link rel="stylesheet" href="styles/font-awesome.min.css" />
 		<link rel="stylesheet" href="styles/fakeLoader.css" />
-		<link rel="stylesheet" href="styles/main.css" />
+		<link rel="stylesheet" href="styles/index.css" />
 		<script type="text/javascript" src="scripts/fakeLoader.js"></script>
 		<script type="text/javascript" src="scripts/canvasjs.min.js"></script>
-		<script type="text/javascript" src="scripts/main.js"></script>	
+		<script type="text/javascript" src="scripts/index.js"></script>	
 	</head>
 	
 	<body style="padding-top: 70px;">
@@ -74,17 +74,23 @@
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li class="dropdown">
-							<a href="#" data-toggle="dropdown" class="dropdown-toggle">City <b class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<li><a data-id="Skopje" class="venuesCity" href="#">Skopje</a></li>
-								<li><a data-id="Ohrid" class="venuesCity" href="#">Ohrid</a></li>
-								<li><a data-id="Bitola" class="venuesCity" href="#">Bitola</a></li>
+							<a href="#" data-toggle="dropdown" class="dropdown-toggle">
+								<p class="venuesCityName" class="lead" style="display:inline;">Skopje</p>
+								<b class="caret"></b>
+							</a>
+							<ul id="citiesList" class="dropdown-menu">
+								<li><a data-id="Skopje" onclick="javascript:changeCity(this);" href="#">Skopje</a></li>
+								<li><a data-id="Ohrid" onclick="javascript:changeCity(this);" href="#">Ohrid</a></li>
+								<li><a data-id="Bitola" onclick="javascript:changeCity(this);" href="#">Bitola</a></li>
 								<li role="presentation" class="divider"></li>
-								<li><a data-id="enter" class="venuesCity" href="#" data-toggle="modal" data-target="#newCity">Add new city</a></li>
+								<li><a data-id="enter" onclick="javascript:changeCity(this);" href="#" data-toggle="modal" data-target="#newCity">Add new city</a></li>
 							</ul>
 						</li>
 						<li class="dropdown">
-							<a href="#" data-toggle="dropdown" class="dropdown-toggle">Category <b class="caret"></b></a>
+							<a href="#" data-toggle="dropdown" class="dropdown-toggle">
+								<p class="venuesCategoryName" style="display:inline;">Pizza restaurants</p>
+								<b class="caret"></b>
+							</a>
 							<ul class="dropdown-menu">
 								<li><a data-id="0" class="venuesCategory" href="#">Pizza restaurants</a></li>
 								<li><a data-id="1" class="venuesCategory" href="#">Restaurants</a></li>
@@ -122,7 +128,7 @@
 		
 			<div class="row">
 				<div class="col-md-3 venueList">
-					<p id="venuesCategoryName" class="lead">Pizza restaurants</p>
+					<p class="venuesCategoryName lead">Pizza restaurants</p>
 					<div id="venuesList" class="list-group scrollable-menu" role="menu"></div>
 				</div>
 				

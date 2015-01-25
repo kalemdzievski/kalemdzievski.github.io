@@ -1,4 +1,5 @@
 	
+	var token;
 	var TOP = 5;
 	var	category = 0;
 	var venues = [];
@@ -784,9 +785,18 @@
         $(".fakeloader").fadeOut();
     }
 	
+	function changeCity(obj) {
+		city = $(obj).data('id');
+		if(city != "enter") {
+			config.city = city;
+			$(".venuesCityName").text(config.city);
+			getVenues(category, token);
+		}
+	}
+	
 $(document).ready(function () {
 	
-	var token = window.location.hash.split("=")[1];
+	token = window.location.hash.split("=")[1];
 		
 	$("#btnMain").click(function () {
 		hideAll();
@@ -809,19 +819,15 @@ $(document).ready(function () {
 		
 		$(".venuesCategory").click(function () {
 			category = $(this).data('id');
+			$(".venuesCategoryName").text(config.categoryNames[category]);
 			getVenues(category, token);
-		});
-		
-		$(".venuesCity").click(function () {
-			city = $(this).data('id');
-			if(city != "enter") {
-				config.city = city;
-				getVenues(category, token);
-			}
 		});
 		
 		$("#btnAddCity").click(function () {
 			config.city = $("#txtCity").val();
+			$(".venuesCityName").text(config.city);
+			var liEl = '<li><a data-id="' + config.city + '" onclick="javascript:changeCity(this);" href="#">' + config.city + '</a></li>';
+			$("#citiesList").prepend(liEl);
 			getVenues(category, token);
 			$('#newCity').modal('hide');
 		});
