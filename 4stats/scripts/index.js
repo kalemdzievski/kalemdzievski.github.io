@@ -796,11 +796,22 @@
 		}
 	}
 	
+	function showMainNav() {
+		$(".navmain").removeClass('hide');
+		$(".navdoc").addClass('hide');
+	}
+	
+	function showDocNav() {
+		$(".navdoc").removeClass('hide');
+		$(".navmain").addClass('hide');
+	}
+	
 $(document).ready(function () {
 	
 	token = window.location.hash.split("=")[1];
 		
 	$("#btnMain").click(function () {
+		showMainNav()
 		hideAll();
 		if(token)
 			$("#mainStats").removeClass('hide');
@@ -809,10 +820,18 @@ $(document).ready(function () {
 	});
 		
 	$("#documentationLink").click(function () {
+		showDocNav();
 		$("#connectContainer").addClass('hide');
 		hideAll();
 		$("#documentation").removeClass('hide');
 	});
+	
+	$('.page-scroll a').bind('click', function(event) {
+        $('html, body').animate({
+	        scrollTop: $( $.attr(this, 'href') ).offset().top - 50
+	    }, 500);
+	    return false;
+    });
 	
 	if(token) {
 	
