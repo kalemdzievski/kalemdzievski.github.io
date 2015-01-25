@@ -901,6 +901,5 @@ $(document).ready(function () {
 			}
 		});
 	}
-	
-	
+		
 });
