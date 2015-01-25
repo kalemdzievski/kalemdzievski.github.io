@@ -798,8 +798,7 @@
 	
 $(document).ready(function () {
 	
-	//token = window.location.hash.split("=")[1];
-	token = "HLT4UTYZGZXWPBZCHNJHXDSDWK221H41HNRQS4EPCHAM0VMK";
+	token = window.location.hash.split("=")[1];
 		
 	$("#btnMain").click(function () {
 		hideAll();

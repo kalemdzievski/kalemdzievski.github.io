@@ -231,7 +231,7 @@
 				  <div class="row">
 					<div class="col-xs-12">
 						<p>
-						Main goal of this project is to explore the <a target="_blank" href="http://canvasjs.com/">CanvasJS</a> library, which is a JavaScript library
+						Main goal of this project is to explore the <a target="_blank" href="http://canvasjs.com/">CanvasJS</a> library, which is a <a target="_blank" href="http://www.w3schools.com/js/">JavaScript</a> library
 						used for creating various numbers of beautiful charts. In this project I have created a simple web application
 						which is called 4Stats and it is using the <a target="_blank" href="http://canvasjs.com/">CanvasJS</a> library.
 						</p>
@@ -239,7 +239,7 @@
 				  </div>
 				</div>
 			</div>
-			<br>
+			<br><br>
 			<hr class="rowcenter col-md-9 col-sm-9">
 			<div class="row">
 				<div class="rowcenter col-md-9 col-sm-9">
@@ -269,7 +269,7 @@
 				  </div>
 				</div>
 			</div>
-			<br>
+			<br><br>
 			<hr class="rowcenter col-md-9 col-sm-9">
 			<div class="row">
 				<div class="rowcenter col-md-9 col-sm-9">
@@ -284,11 +284,146 @@
 						Graphs include several good looking themes and are 10x faster than conventional Flash / SVG based 
 						Libraries – resulting in lightweight, beautiful and responsive dashboards.
 						</p>
+						
+						<h4>Usage</h4>
+						<p>
+							Download <a target="_blank" href="http://canvasjs.com/">CanvasJS</a> library from the official <a target="_blank" href="http://canvasjs.com/">website</a>. Add the scripts into your project and
+							add the scripts into the head of your <a target="_blank" href="http://www.w3schools.com/html/default.asp">HTML</a> page. For standalone version include canvasjs.min.js. 
+							For <a target="_blank" href="http://jquery.com/">jQuery</a> version include jQuery.canvasjs.min.js.
+						</p>
+						
+<!-- HTML generated using hilite.me -->
+<pre style="margin: 0; line-height: 125%"><span style="color: #008000; font-weight: bold">&lt;head&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;script </span><span style="color: #7D9029">type=</span><span style="color: #BA2121">&quot;text/javascript&quot;</span> <span style="color: #7D9029">src=</span><span style="color: #BA2121">&quot;scripts/canvasjs.min.js&quot;</span><span style="color: #008000; font-weight: bold">&gt;&lt;/script&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/head&gt;</span>
+</pre>
+
+						<br>
+						<h4>Example</h4>
+						<p>
+							Using <a target="_blank" href="http://canvasjs.com/">CanvasJS</a> is very easy. Using some simple <a target="_blank" href="http://www.w3schools.com/html/default.asp">HTML</a> and JavasScript code we can
+							easily create beautiful charts. Step one is to add a div container in the body
+							of your <a target="_blank" href="http://www.w3schools.com/html/default.asp">HTML</a> page. This will be the container where the chart will be rendered.
+							Specify the id for the container which we will use it to identify the container when rendering
+							the chart. Also add height and weight to the div like in the following example.
+						</p>		
+<!-- HTML generated using hilite.me -->
+<pre style="margin: 0; line-height: 125%"><span style="color: #008000; font-weight: bold">&lt;body&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;div</span> <span style="color: #7D9029">id=</span><span style="color: #BA2121">&quot;chartContainer&quot;</span> <span style="color: #7D9029">style=</span><span style="color: #BA2121">&quot;height: 300px; width: 100%;&quot;</span><span style="color: #008000; font-weight: bold">&gt;&lt;/div&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/body&gt;</span>
+</pre>
+						
+						<br>
+						<p>
+							Next we will create a simple <a target="_blank" href="http://www.w3schools.com/js/">JavaScript</a> function which will be called when the
+							window will be loaded. In this function we will create the chart variable where
+							the chart will be created. In the constructor <code>new CanvasJS.Chart(params...)</code> 
+							we have to specify the id of the div container that we created in the section above, and
+							the properties of the chart. We have a various set of properties we can set to the chart
+							like theme, title, whether to use animation or not, many other things and the most
+							important part, the data. The data is passed in <a target="_blank" href="http://www.w3schools.com/json/">JSON</a> format which is very easy to use.
+							At the end we have to render the chart, which is a very easy line of code <code>chart.render();</code>, 
+							and voila, your chart is ready to go.
+						</p>
+<!-- HTML generated using hilite.me -->
+<pre style="margin: 0; line-height: 125%"><span style="color: #008000; font-weight: bold">&lt;script </span><span style="color: #7D9029">type=</span><span style="color: #BA2121">&quot;text/javascript&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+<span style="color: #008000">window</span>.onload <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">function</span> () {
+	<span style="color: #008000; font-weight: bold">var</span> chart <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">new</span> CanvasJS.Chart(<span style="color: #BA2121">&quot;chartContainer&quot;</span>, {
+		theme<span style="color: #666666">:</span> <span style="color: #BA2121">&quot;theme2&quot;</span>,<span style="color: #408080; font-style: italic">//theme1</span>
+		title<span style="color: #666666">:</span>{
+			text<span style="color: #666666">:</span> <span style="color: #BA2121">&quot;Basic Column Chart - CanvasJS&quot;</span>              
+		},
+		animationEnabled<span style="color: #666666">:</span> <span style="color: #008000; font-weight: bold">false</span>,   <span style="color: #408080; font-style: italic">// change to true</span>
+		data<span style="color: #666666">:</span> [              
+		{
+			<span style="color: #408080; font-style: italic">// Change type to &quot;bar&quot;, &quot;splineArea&quot;, &quot;area&quot;, &quot;spline&quot;, &quot;pie&quot;,etc.</span>
+			type<span style="color: #666666">:</span> <span style="color: #BA2121">&quot;column&quot;</span>,
+			dataPoints<span style="color: #666666">:</span> [
+				{ label<span style="color: #666666">:</span> <span style="color: #BA2121">&quot;apple&quot;</span>,  y<span style="color: #666666">:</span> <span style="color: #666666">10</span>  },
+				{ label<span style="color: #666666">:</span> <span style="color: #BA2121">&quot;orange&quot;</span>, y<span style="color: #666666">:</span> <span style="color: #666666">15</span>  },
+				{ label<span style="color: #666666">:</span> <span style="color: #BA2121">&quot;banana&quot;</span>, y<span style="color: #666666">:</span> <span style="color: #666666">25</span>  },
+				{ label<span style="color: #666666">:</span> <span style="color: #BA2121">&quot;mango&quot;</span>,  y<span style="color: #666666">:</span> <span style="color: #666666">30</span>  },
+				{ label<span style="color: #666666">:</span> <span style="color: #BA2121">&quot;grape&quot;</span>,  y<span style="color: #666666">:</span> <span style="color: #666666">28</span>  }
+			]
+		}
+		]
+	});
+	chart.render();
+}
+<span style="color: #008000; font-weight: bold">&lt;/script&gt;</span>
+</pre>
+
+						<br>
+						<p>Here is a full example:</p>
+<!-- HTML generated using hilite.me -->
+<pre style="margin: 0; line-height: 125%"><span style="color: #BC7A00">&lt;!DOCTYPE HTML&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;html&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;head&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;script </span><span style="color: #7D9029">type=</span><span style="color: #BA2121">&quot;text/javascript&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+<span style="color: #008000">window</span>.onload <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">function</span> () {
+	<span style="color: #008000; font-weight: bold">var</span> chart <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">new</span> CanvasJS.Chart(<span style="color: #BA2121">&quot;chartContainer&quot;</span>, {
+		theme<span style="color: #666666">:</span> <span style="color: #BA2121">&quot;theme2&quot;</span>,<span style="color: #408080; font-style: italic">//theme1</span>
+		title<span style="color: #666666">:</span>{
+			text<span style="color: #666666">:</span> <span style="color: #BA2121">&quot;Basic Column Chart - CanvasJS&quot;</span>              
+		},
+		animationEnabled<span style="color: #666666">:</span> <span style="color: #008000; font-weight: bold">false</span>,   <span style="color: #408080; font-style: italic">// change to true</span>
+		data<span style="color: #666666">:</span> [              
+		{
+			<span style="color: #408080; font-style: italic">// Change type to &quot;bar&quot;, &quot;splineArea&quot;, &quot;area&quot;, &quot;spline&quot;, &quot;pie&quot;,etc.</span>
+			type<span style="color: #666666">:</span> <span style="color: #BA2121">&quot;column&quot;</span>,
+			dataPoints<span style="color: #666666">:</span> [
+				{ label<span style="color: #666666">:</span> <span style="color: #BA2121">&quot;apple&quot;</span>,  y<span style="color: #666666">:</span> <span style="color: #666666">10</span>  },
+				{ label<span style="color: #666666">:</span> <span style="color: #BA2121">&quot;orange&quot;</span>, y<span style="color: #666666">:</span> <span style="color: #666666">15</span>  },
+				{ label<span style="color: #666666">:</span> <span style="color: #BA2121">&quot;banana&quot;</span>, y<span style="color: #666666">:</span> <span style="color: #666666">25</span>  },
+				{ label<span style="color: #666666">:</span> <span style="color: #BA2121">&quot;mango&quot;</span>,  y<span style="color: #666666">:</span> <span style="color: #666666">30</span>  },
+				{ label<span style="color: #666666">:</span> <span style="color: #BA2121">&quot;grape&quot;</span>,  y<span style="color: #666666">:</span> <span style="color: #666666">28</span>  }
+			]
+		}
+		]
+	});
+	chart.render();
+}
+<span style="color: #008000; font-weight: bold">&lt;/script&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;script </span><span style="color: #7D9029">type=</span><span style="color: #BA2121">&quot;text/javascript&quot;</span> <span style="color: #7D9029">src=</span><span style="color: #BA2121">&quot;/assets/script/canvasjs.min.js&quot;</span><span style="color: #008000; font-weight: bold">&gt;&lt;/script&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/head&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;body&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;div</span> <span style="color: #7D9029">id=</span><span style="color: #BA2121">&quot;chartContainer&quot;</span> <span style="color: #7D9029">style=</span><span style="color: #BA2121">&quot;height: 300px; width: 100%;&quot;</span><span style="color: #008000; font-weight: bold">&gt;&lt;/div&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/body&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/html&gt;</span>
+</pre>
+						
+						<br>
+						<p>The code above will show the next chart:</p>
+						<img src="images/canvasJS_example.png" class="img-responsive img-thumbnail" width="100%" alt="Responsive image" />
+					
+						<br><br>
+						<h4>Problems</h4>
+						<p>
+						Through the development of this application I run only on one problem. One of the
+						<a target="_blank" href="http://getbootstrap.com/">Bootstrap</a>'s priorities is to make
+						your application responsive, so at most of the time the sizes of the div elements are being changed.
+						The problem that I found using <a target="_blank" href="http://getbootstrap.com/">Bootstrap</a> and
+						<a target="_blank" href="http://canvasjs.com/">CanvasJS</a> together is that 
+						<a target="_blank" href="http://getbootstrap.com/">Bootstrap</a> is setting the size of the container
+						after <a target="_blank" href="http://canvasjs.com/">CanvasJS</a> renders the chart. Because we've
+						specified a default size of the chart, the chart is immediately rendered with that size into the container and
+						<a target="_blank" href="http://getbootstrap.com/">Bootstrap</a> sets the size after that. So the chart
+						does not take the full size of the container. Because of this I had to provide solution that will wait some
+						time before rendering the chart into the container. Easiest way is to use the <code>setTimeout()</code>
+						function from <a target="_blank" href="http://www.w3schools.com/js/">JavaScript</a> which will delay the 
+						rendering of the chart. In the following example the chart is rendered with a 10 milliseconds delay. 
+						</p>
+<!-- HTML generated using hilite.me -->
+<pre style="margin: 0; line-height: 125%">setTimeout(<span style="color: #008000; font-weight: bold">function</span>(){
+     chart.render();
+},<span style="color: #666666">10</span>);
+</pre>
+
 					</div>
 				  </div>
 				</div>
 			</div>
-			<br>
+			<br><br>
 			<hr class="rowcenter col-md-9 col-sm-9">
 			<div class="row">
 				<div class="rowcenter col-md-9 col-sm-9">
@@ -315,7 +450,7 @@
 							<li>
 								<h4><a target="_blank" href="http://sigmajs.org/">SigmaJS</a></h4>
 								<p>
-								Sigma is a JavaScript library dedicated to graph drawing. It makes easy to publish networks on Web pages, 
+								Sigma is a <a target="_blank" href="http://www.w3schools.com/js/">JavaScript</a> library dedicated to graph drawing. It makes easy to publish networks on Web pages, 
 								and allows developers to integrate network exploration in rich Web applications.
 								</p>
 							</li>
@@ -328,8 +463,9 @@
 							<li>
 								<h4><a target="_blank" href="http://d3js.org/">D3.js</a></h4>
 								<p>
-								D3.js is a JavaScript library for manipulating documents based on data. D3 helps you bring data to life using HTML, 
-								SVG and CSS.
+								D3.js is a <a target="_blank" href="http://www.w3schools.com/js/">JavaScript</a> library for manipulating documents based on data. D3 helps you bring data to life using 
+								<a target="_blank" href="http://www.w3schools.com/html/default.asp">HTML</a>, 
+								SVG and <a target="_blank" href="http://www.w3schools.com/css/">CSS</a>.
 								</p>
 							</li>
 					  </ul>
@@ -337,7 +473,7 @@
 				  </div>
 				</div>
 			</div>
-			<br>
+			<br><br>
 			<hr class="rowcenter col-md-9 col-sm-9">
 			<div class="row">
 				<div class="rowcenter col-md-9 col-sm-9">
@@ -355,7 +491,7 @@
 				  </div>
 				</div>
 			</div>
-			<br>
+			<br><br>
 			<hr class="rowcenter col-md-9 col-sm-9">
 			<div class="row">
 				<div class="rowcenter col-md-9 col-sm-9">
@@ -375,7 +511,7 @@
 				  </div>
 				</div>
 			</div>
-			<br>
+			<br><br>
 			<hr class="rowcenter col-md-9 col-sm-9">
 			<div class="row">
 				<div class="rowcenter col-md-9 col-sm-9">
@@ -397,7 +533,7 @@
 				  </div>
 				</div>
 			</div>
-			<br>
+			<br><br>
 		</div>
 		
 		<div class="footer text-center">
