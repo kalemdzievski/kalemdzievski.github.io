@@ -102,13 +102,12 @@
 						</li>
 					</ul>
 					<ul class="nav navbar-nav hide navdoc">
+						<li class="page-scroll"><a id="btnRating" href="#introduction">Introduction</a></li>
 						<li class="page-scroll"><a id="btnRating" href="#mainGoal">Main goal</a></li>
-						<li class="page-scroll"><a id="btnRating" href="#4Stats">4Stats</a></li>
 						<li class="page-scroll"><a id="btnRating" href="#canvasJS">CanvasJS</a></li>
 						<li class="page-scroll"><a id="btnRating" href="#other">Other similar technologies</a></li>
 						<li class="page-scroll"><a id="btnRating" href="#cavansJSVsOthers">CanvasJS vs The others</a></li>
-						<li class="page-scroll"><a id="btnRating" href="#data">Data</a></li>
-						<li class="page-scroll"><a id="btnRating" href="#technologies">Technologies used</a></li>
+						<li class="page-scroll"><a id="btnRating" href="#4Stats">4Stats</a></li>
 					</ul>
 				</div>
 			</div>
@@ -233,67 +232,115 @@
 		</div>
 		
 		<div id="documentation" class="container hide">
+			<div id="introduction" class="row">
+				<div class="rowcenter col-md-9 col-sm-9">
+				  <h2>Introduction</h2>
+				  <div class="row">
+					<div class="col-xs-12">
+						<p>
+						It is clear that the era of the web and mobile application is here and 
+						is getting more and more bigger and advanced as it goes. Design has been 
+						always a very important part of the applications, or more commonly said 
+						the design sales the application. In the past people were used to see simple
+						and plain web applications, with not much of a design, and that was ok. 
+						It was more important the functionality of the application, rather than 
+						the design. In the past getting an awesome design meant writing unique <a target="_blank" href="http://www.w3schools.com/css/">CSS</a> 
+						styles from scratch. And that was very difficult. Only people with a great 
+						talent and passion were good at it. But as the time goes things are changing. 
+						Today’s web applications are not as simple and plain as in the past. Almost 
+						every application that we see today has a great design, and also is responsive 
+						through all devices. We see more and more beautiful web and mobile applications, 
+						more and more new design concepts, more and more beautiful stuff on the internet. 
+						And now, people, companies are not looking only to get only a functional and 
+						stable application, but also an impressive design, that will keep the user 
+						interested and stunned. All this resulted with such a great and awesome technologies
+						that made the development of the design easier, but also very stunningly beautiful. 
+						One of the best so far is definitely <a target="_blank" href="http://getbootstrap.com/">Bootstrap</a> made by 
+						<a target="_blank" href="https://twitter.com/?lang=en">Twitter</a>. 
+						<a target="_blank" href="http://getbootstrap.com/">Bootstrap</a> is a 
+						framework that offers a lot of <a target="_blank" href="http://www.w3schools.com/css/">CSS</a> styles and features that have great design and 
+						are also responsive. It makes the development of the frontend and design like a 
+						peace of cake. Most of the applications represent some data. And it is important 
+						how that data is represented. Some times it is not useful to show only text or 
+						numbers, but to show that data with images or even better charts. Charts will be 
+						the perfect way to see graphical representation of the data, because there are a 
+						ton of different charts that will make the data more understandable and readable 
+						for the user. And now we have a lot of technologies for that to, and they are very 
+						good and also have awesome design. One of them is <a target="_blank" href="http://canvasjs.com/">CanvasJS</a> 
+						which is a library for graphical representation of data, and offers a lot of beautiful charts. In the following 
+						sections we will see the power of <a target="_blank" href="http://canvasjs.com/">CanvasJS</a>.
+						</p>
+					</div>
+				  </div>
+				</div>
+			</div>
+			<br><br>
+			
 			<div id="mainGoal" class="row">
 				<div class="rowcenter col-md-9 col-sm-9">
 				  <h2>Main goal</h2>
 				  <div class="row">
 					<div class="col-xs-12">
 						<p>
-						Main goal of this project is to explore the <a target="_blank" href="http://canvasjs.com/">CanvasJS</a> library, which is a <a target="_blank" href="http://www.w3schools.com/js/">JavaScript</a> library
-						used for creating various numbers of beautiful charts. In this project I have created a simple web application
-						which is called 4Stats and it is using the <a target="_blank" href="http://canvasjs.com/">CanvasJS</a> library.
+						Main goal of this project is to explore the <a target="_blank" href="http://canvasjs.com/">CanvasJS</a>
+						library for graphical representation of data, see the possibilities it has, explore other similar 
+						technologies and what are <a target="_blank" href="http://canvasjs.com/">CanvasJS</a> advantages 
+						and disadvantages compared to them. This project also includes implementation of 
+						<a target="_blank" href="http://canvasjs.com/">CanvasJS</a> in application in 
+						order to see how it works and get better understanding and knowledge for it. 
+						In the next few pages we will see detailed explanation of what 
+						<a target="_blank" href="http://canvasjs.com/">CanvasJS</a> is, 
+						what it does, some simple examples, and how it can be used. Also we will see 
+						the web application 4Stats where <a target="_blank" href="http://canvasjs.com/">CanvasJS</a> takes action.
 						</p>
 					</div>
 				  </div>
 				</div>
 			</div>
 			<br><br>
-			<hr class="rowcenter col-md-9 col-sm-9">
-			<div id="4Stats" class="row">
-				<div class="rowcenter col-md-9 col-sm-9">
-				  <h2>4Stats</h2>
-				  <div class="row">
-					<div class="col-xs-12">
-						<p>
-						4Stats is a simple web application that uses <a target="_blank" href="https://developer.foursquare.com/">Foursquare API</a> to get data for Macedonian local places 
-						or as they are called by <a target="_blank" href="https://developer.foursquare.com/">Foursquare API</a> - Venues, and create simple statistics for them. 
-						The statistics are shown with the beautiful <a target="_blank" href="http://canvasjs.com/">CanvasJS</a> chars in various categories and themes. 
-						4Stats gets the top 50 places in one city, for one category (ex. Pizza restaurants) and creates statistics 
-						for the following categories:
-						</p>
-						<ul>
-							<li>Top 5 venues by rating</li>
-							<li>Top 5 venues by number of users</li>
-							<li>Top 5 venues by number of tips</li>
-							<li>Top 5 venues by number of photos</li>
-							<li>Top 5 venues by number of checkins</li>
-						</ul>
-						<p>
-						Each of these statistics is shown into separate <a target="_blank" href="http://canvasjs.com/">CanvasJS</a> chart with detailed data.
-						4Stats is also showing some simple statistics for each venue separately, like number of likes, 
-						tips, photos, users, checkins.
-						</p>
-					</div>
-				  </div>
-				</div>
-			</div>
-			<br><br>
+			
 			<hr class="rowcenter col-md-9 col-sm-9">
 			<div id="canvasJS" class="row">
 				<div class="rowcenter col-md-9 col-sm-9">
 				  <h2>CanvasJS</h2>
 				  <div class="row">
 					<div class="col-xs-12">
-						<h4>About</h4>
+						<h4>What should you know?</h4>
 						<p>
-						An easy to use <a target="_blank" href="http://www.w3schools.com/html/default.asp">HTML</a> <a target="_blank" href="http://www.w3schools.com/js/">JavaScript</a> Charting library built on Canvas element. 
-						Charts can render across devices including iPhone, iPad, Android, Windows Phone, Desktops, etc. 
-						This allows you to create rich dashboards that can work across devices without compromising on 
-						maintainability or functionality of your web application. 
-						Graphs include several good looking themes and are 10x faster than conventional Flash / <a target="_blank" href="http://www.w3schools.com/svg/">SVG</a> based 
-						Libraries – resulting in lightweight, beautiful and responsive dashboards.
+						<a target="_blank" href="http://canvasjs.com/">CanvasJS</a> requires basic knowledge of 
+						<a target="_blank" href="http://www.w3schools.com/html/default.asp">HTML</a> and 
+						<a target="_blank" href="http://www.w3schools.com/js/">JavaScript</a>.
 						</p>
 						
+						<br>
+						<h4>What is CanvasJS?</h4>
+						<p>
+						<a target="_blank" href="http://canvasjs.com/">CanvasJS</a> is 
+						<a target="_blank" href="http://www.w3schools.com/html/default.asp">HTML</a> 
+						<a target="_blank" href="http://www.w3schools.com/js/">JavaScript</a> 
+						charting library for creating a lot of different charts. 
+						<a target="_blank" href="http://canvasjs.com/">CanvasJS</a> supports 24 different 
+						types of JavaScript Charts – including line, column, 
+						bar, spline, area, pie, doughnut, stock charts and other. Charts can be rendered across 
+						all devices including iPhone, iPad, Android, Windows Phone, Desktops and other. 
+						Comes with a several very good looking themes. Really easy to create charts that are 
+						10 times faster than conventional Flash / SVG based Libraries. When it comes to 
+						performance <a target="_blank" href="http://canvasjs.com/">CanvasJS</a> can render 100,000 Data-Points in just around 100 milliseconds, 
+						which is pretty impressive. Free for non-commercial and paid for commercial use.
+						</p>
+						
+						<br>
+						<h4>Why CanvasJS?</h4>
+						<ol>
+							<li>Very <b>simple and intuitive API</b> – you can get started in minutes.</li>
+							<li>Comes with <b>Beautiful and Elegant</b> looking themes.</li>
+							<li>High performance.</li>
+							<li>Works on all modern devices.</li>
+							<li><a target="_blank" href="http://canvasjs.com/">CanvasJS</a> is <b>Standalone</b> – does not depend on any other library.</li>
+							<li>Fanatic Support from developers.</li>
+						</ol>
+						
+						<br>
 						<h4>Usage</h4>
 						<p>
 							Download the <a target="_blank" href="http://canvasjs.com/">CanvasJS</a> library from the official <a target="_blank" href="http://canvasjs.com/download-html5-charting-graphing-library/">website</a>. Add the scripts into your project and
@@ -433,6 +480,7 @@
 				</div>
 			</div>
 			<br><br>
+			
 			<hr class="rowcenter col-md-9 col-sm-9">
 			<div id="other" class="row">
 				<div class="rowcenter col-md-9 col-sm-9">
@@ -483,6 +531,7 @@
 				</div>
 			</div>
 			<br><br>
+			
 			<hr class="rowcenter col-md-9 col-sm-9">
 			<div id="cavansJSVsOthers" class="row">
 				<div class="rowcenter col-md-9 col-sm-9">
@@ -607,12 +656,45 @@
 				</div>
 			</div>
 			<br><br>
+						
 			<hr class="rowcenter col-md-9 col-sm-9">
-			<div id="data" class="row">
+			<div id="4Stats" class="row">
 				<div class="rowcenter col-md-9 col-sm-9">
-				  <h2>Data</h2>
+				  <h2>4Stats</h2>
 				  <div class="row">
 					<div class="col-xs-12">
+					
+						<h4>About</h4>
+						<p>
+						4Stats is web application that shows detailed statistics for local 
+						places in Macedonia, but other cities from all over the world can be 
+						added also. The statistics are shown with beautiful 
+						<a target="_blank" href="http://canvasjs.com/">CanvasJS</a> chars. 
+						4Stats shows a list of the top 50 places in selected city and from 
+						selected category, for example city Skopje and category restaurants. 
+						You can choose from the few cities provided for Macedonia, or you can 
+						add new one, anywhere in the world. The top 50 places from the chosen 
+						city and category are pulled and showed in list, where you can choose 
+						a place and see detailed statistics for that place. For every place 
+						there are information like number of likes, tips, photos, users, 
+						checkins. For all of the 50 places, there is general statistics in 
+						few categories: Top 5 places by rating, users, photos, tips and checkins.
+						</p>
+						<br>
+						
+						<h4>Connection with Foursquare</h4>
+						<p>
+						In order 4Stats can pull data from <a target="_blank" href="https://foursquare.com/">Foursquare</a>
+						you have to be connected with <a target="_blank" href="https://foursquare.com/">Foursquare</a>. 
+						That can be easily done by clicking the “Connect with Foursquare” button and then login 
+						with your <a target="_blank" href="https://foursquare.com/">Foursquare</a>
+						account (<a target="_blank" href="https://www.facebook.com/">Facebook</a> 
+						login is optional if you don’t have <a target="_blank" href="https://foursquare.com/">Foursquare</a> 
+						account). This will generate unique token which will be used for user authorization for the API calls.
+						</p>
+						<br>
+						
+						<h4>Data</h4>
 						<p>
 						All the data 4Stats uses is pulled by the <a target="_blank" href="https://developer.foursquare.com/">Foursquare API</a>.The <a target="_blank" href="https://developer.foursquare.com/">Foursquare API</a> gives you access 
 						to world-class places database and the ability to interact with Foursquare users and merchants.
@@ -622,17 +704,9 @@
 						is very easy to parse. 4Stats uses the <a target="_blank" href="https://developer.foursquare.com/docs/venues/explore">Explore API</a> from Foursquare, that is returning the top 50 places 
 						for one category in specified city. 
 						</p>
-					</div>
-				  </div>
-				</div>
-			</div>
-			<br><br>
-			<hr class="rowcenter col-md-9 col-sm-9">
-			<div id="technologies" class="row">
-				<div class="rowcenter col-md-9 col-sm-9">
-				  <h2>Technologies used</h2>
-				  <div class="row">
-					<div class="col-xs-12">
+						<br>
+						
+						<h4>Technologies used</h4>
 						<ul>
 							<li><a target="_blank" href="http://www.w3schools.com/html/default.asp">HTML</a></li>
 							<li><a target="_blank" href="http://www.w3schools.com/css/">CSS</a></li>
@@ -644,6 +718,8 @@
 							<li><a target="_blank" href="https://developer.foursquare.com/">Foursquare API</a></li>
 							<li><a target="_blank" href="http://www.w3schools.com/json/">JSON</a></li>
 						</ul>
+						<br>
+						
 					</div>
 				  </div>
 				</div>

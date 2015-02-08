@@ -74,12 +74,12 @@
 					}
 				}
 				else {
-					alert("ERROR");
+					alert("There has been an error. Please try again later.");
 				}
 			},
 			error: function (data) {
 				hideLoader();
-				alert("ERROR");
+				alert("There has been an error. Please try again later.");
 			}
 		});
 		
@@ -143,12 +143,12 @@
 			
 				}
 				else {
-					alert("ERROR");
+					alert("There has been an error. Please try again later.");
 				}
 			},
 			error: function (data) {
 				hideLoader();
-				alert("ERROR");
+				alert("There has been an error. Please try again later.");
 			}
 		});
 		
@@ -786,13 +786,16 @@
     }
 	
 	function changeCity(obj) {
-		city = $(obj).data('id');
-		if(city != "enter") {
-			$("#citiesList li").removeClass("active");
-			$(obj).parent().addClass("active");
-			config.city = city;
-			$(".venuesCityName").text(config.city);
-			getVenues(category, token);
+		
+		if(token) {
+			city = $(obj).data('id');
+			if(city != "enter") {
+				$("#citiesList li").removeClass("active");
+				$(obj).parent().addClass("active");
+				config.city = city;
+				$(".venuesCityName").text(config.city);
+				getVenues(category, token);
+			}
 		}
 	}
 	
